@@ -955,12 +955,10 @@ function openTipsDialog(id){
     delete TIPS_LOCAL[id];
     saveTipsLocal(); closeDialog(); toast('原文に戻しました');
   };
-  $('#tipsExport').onclick = () => {
+  $('#tipsExport').onclick = async () => {
     const merged = { ...TIPS_REPO, ...TIPS_LOCAL };
-    const blob = new Blob([JSON.stringify(merged, null, 2)], { type:'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'tips_overrides.json'; a.click();
-    URL.revokeObjectURL(a.href);
+    const r = await saveJsonFile(merged, 'tips_overrides.json', 'u2bv-data');
+    if (r === 'cancelled') return;
     toast('data/ ディレクトリに置いて公開してください');
   };
   dlgOverlay.classList.add('show');
@@ -974,6 +972,35 @@ $('#tipBody').addEventListener('click', ev => {
   tip.classList.remove('show');
   openTipsDialog(a.dataset.id);
 });
+
+/* JSON を「名前を付けて保存」ダイアログで保存する。
+ * File System Access API 対応ブラウザ(Chrome/Edge)では dirId ごとに前回の保存先を記憶するので、
+ * 一度 builds/ を選べば次回からそのフォルダが最初から開く。
+ * 非対応ブラウザ(Safari 等)や未許可時は従来どおりダウンロードにフォールバックする。
+ * 返り値: 'saved' | 'downloaded' | 'cancelled' */
+async function saveJsonFile(obj, suggestedName, dirId){
+  const text = JSON.stringify(obj, null, 2);
+  if (window.showSaveFilePicker) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName, id: dirId, startIn: 'documents',
+        types: [{ description: 'JSON', accept: { 'application/json': ['.json'] } }],
+      });
+      const ws = await handle.createWritable();
+      await ws.write(text);
+      await ws.close();
+      return 'saved';
+    } catch (e) {
+      if (e && e.name === 'AbortError') return 'cancelled'; // ユーザーがキャンセル
+      // それ以外(未許可・セキュリティ制限等)は下のダウンロードにフォールバック
+    }
+  }
+  const blob = new Blob([text], { type:'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = suggestedName; a.click();
+  URL.revokeObjectURL(a.href);
+  return 'downloaded';
+}
 
 /* ===== 保存スロット (localStorage) ===== */
 function loadSlots(){ try { return JSON.parse(localStorage.getItem(LS_SLOTS)) || {}; } catch { return {}; } }
@@ -996,8 +1023,9 @@ function renderSlotsPanel(){
     </div>
     <div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px">
       <div class="hint" style="margin-bottom:6px">📌 <b>更新できる固定URLで配布</b>: 書き出したJSONをリポジトリの
-        <b>builds/</b> に置くと <b>?build=ファイル名.json</b> で共有できます。
-        ファイルを上書きすれば、閲覧者は再読み込みだけで最新ビルドが見られます。</div>
+        <b>builds/</b> に保存すると <b>?build=ファイル名.json</b> で共有できます。
+        ファイルを上書きすれば、閲覧者は再読み込みだけで最新ビルドが見られます。<br>
+        <span style="opacity:.8">※ 初回だけ保存先に builds フォルダを選べば、次回から自動でそこが開きます(Chrome/Edge)。</span></div>
       <button class="btn small" id="slotExport">⤓ 現在のビルドをJSONで書き出し</button>
     </div>`;
   p.querySelectorAll('.slot-row button').forEach(b => b.onclick = () => {
@@ -1020,14 +1048,14 @@ function renderSlotsPanel(){
     toast(`「${n}」に保存しました`);
   };
   // builds/ ディレクトリ配布用のJSON書き出し(固定URLで最新版を配信できる)
-  $('#slotExport').onclick = () => {
+  $('#slotExport').onclick = async () => {
     // ファイル名はビルド名から生成(ファイル名/URLに使えない文字は _ に置換)
     const fname = ((state.name || 'build').replace(/[\\/:*?"<>|#&\s]+/g, '_') || 'build') + '.json';
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type:'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = fname; a.click();
-    URL.revokeObjectURL(a.href);
-    toast(`${fname} を書き出しました。builds/ に置いて ?build=${fname} で共有できます`);
+    const r = await saveJsonFile(state, fname, 'u2bv-builds');
+    if (r === 'cancelled') return;
+    toast(r === 'saved'
+      ? `${fname} を保存しました。commit → push で公開されます`
+      : `${fname} を書き出しました。builds/ に置いて ?build=${fname} で共有できます`);
   };
 }
 
