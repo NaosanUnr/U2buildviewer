@@ -1,0 +1,73 @@
+{
+  "v": 2,
+  "name": "東雲奈緒配信中！",
+  "concept": "配信中のビルドはこれ！\nTimeはリアルタイム更新できないからある程度固まったら入れ込むね。",
+  "tags": [
+    "Endless",
+    "time"
+  ],
+  "engine": "pusher",
+  "enginePos": 4,
+  "wagons": [
+    {
+      "id": "storage",
+      "level": 6,
+      "memo": "",
+      "ext": [
+        "front-pull",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "collector",
+      "level": 6,
+      "memo": "",
+      "ext": [
+        "hydrocharge",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "ghost",
+      "level": 2,
+      "memo": "",
+      "ext": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "supercharger",
+      "level": 1,
+      "memo": "",
+      "ext": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "miner",
+      "level": 2,
+      "memo": "",
+      "ext": [
+        "supercharge",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "crafter",
+      "level": 3,
+      "memo": "",
+      "ext": [
+        "storage-pull",
+        "hydrocharge",
+        null
+      ]
+    }
+  ]
+}
