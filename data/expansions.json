@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "source": "https://w.atwiki.jp/unrailed2/pages/56.html",
+    "extracted_at": "2026-07-18",
+    "notes": [
+      "name_ja は拡張パーツページ(56)の表記。wagons.json の対応表とは表記が異なる場合がある",
+      "level_plus は装着したワゴン自身のレベルに加算される値"
+    ]
+  },
+  "parts": {
+    "storage-pull":    { "name_ja": "貨物引き寄せ",     "description": "貨物ワゴンからワゴンに適合する資材を引き寄せる" },
+    "storage-push":    { "name_ja": "貨物押し出し",     "description": "出力されたアイテムを貨物ワゴンに移動する" },
+    "front-pull":      { "name_ja": "フロント引き寄せ", "description": "1つ前にあるワゴンから資材を引き寄せる" },
+    "auto-drop":       { "name_ja": "自動ドロップ",     "description": "出力されたアイテムを近くの地面に落とす" },
+    "magnet-pick":     { "name_ja": "マグネット吸引",   "description": "近く地面に落ちている資材を引き寄せる" },
+    "ghost":           { "name_ja": "ゴースト",         "description": "ワゴンを通り抜けられるようになる" },
+    "hydrocharge":     { "name_ja": "ハイドロチャージ", "description": "ワゴンのレベルが2上がるが、水をかけないとワゴンが燃えてしまう", "level_plus": 2 },
+    "supercharge":     { "name_ja": "スーパーチャージ", "description": "ワゴンのレベルが1上がる", "level_plus": 1 },
+    "range-extension": { "name_ja": "範囲拡張",         "description": "ワゴンの効果範囲を広げる" },
+    "speed-boost":     { "name_ja": "スピードブースト", "description": "ワゴンの作業速度が上がる" },
+    "stack-boost":     { "name_ja": "スタックブースト", "description": "ワゴンの積載量が上がる" },
+    "time-extension":  { "name_ja": "時間延長",         "description": "ワゴンの有効時間が伸びる" },
+    "key":             { "name_ja": "鍵",               "description": "たくさんの鍵がかかった扉を開けるピカピカの鍵" }
+  }
+}

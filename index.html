@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unrailed! 2 — Build Viewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="t">Unrailed<span class="accent">2</span> · Build Viewer</div>
+    <div class="s">列車ビルドの可視化・共有ツール ／ 右が先頭（front）</div>
+  </div>
+  <span id="modeBadge" class="mode-badge preview">PREVIEW</span>
+  <div class="spacer"></div>
+  <!-- 編集モード用ボタン -->
+  <button class="btn primary" id="shareBtn" hidden>🔗 共有URLをコピー</button>
+  <button class="btn" id="slotsBtn" hidden>💾 保存スロット</button>
+  <button class="btn ghost" id="rememberBtn" hidden>編集者として記憶</button>
+  <button class="btn subtle" id="previewToggleBtn" hidden>👁 プレビュー確認</button>
+</header>
+
+<!-- ビルドメタ情報 -->
+<div class="meta-bar" id="metaBar"></div>
+
+<main>
+  <div class="stage-wrap"><div class="stage">
+    <div class="arrow-layer"><svg id="arrowSvg" preserveAspectRatio="none"></svg></div>
+    <div class="train" id="train"></div>
+  </div></div>
+
+  <!-- フロー凡例(使用中の資材のみ表示・プレビューでも出す) -->
+  <div class="legend" id="legend"></div>
+
+  <!-- パレット(編集モードのみ) -->
+  <div class="palette" id="palette" hidden>
+    <div class="palette-bar">
+      <span class="hint" id="paletteHint">下のワゴンをクリックで編成の最後尾に追加。カード下の拡張スロットをクリックでパーツ装着(矢印は 貨物引き寄せ / 貨物押し出し / フロント引き寄せ から自動生成)。</span>
+    </div>
+    <div class="tabs" id="engineTabs"></div>
+    <div class="tabs" id="catTabs">
+      <div class="tab on" data-cat="normal">🚃 通常ワゴン</div>
+      <div class="tab" data-cat="special">✨ 特殊ワゴン</div>
+      <div class="tab" data-cat="versus">⚔ 対戦用</div>
+    </div>
+    <div class="tray" id="tray"></div>
+  </div>
+
+  <!-- プレビュー時の「コピーして編集」リンク(目立たない位置) -->
+  <div class="legend" id="copyEditWrap" hidden>
+    <a id="copyEditLink" href="#" style="color:var(--muted);font-size:11px">このビルドをコピーして自分用に編集する →</a>
+  </div>
+</main>
+
+<!-- ツールチップ / 詳細パネル -->
+<div class="tip" id="tip"><button class="close-tip" id="tipClose">✕</button><div id="tipBody"></div></div>
+
+<!-- フロー作成/メモ編集ダイアログ -->
+<div class="dlg-overlay" id="dlgOverlay">
+  <div class="dlg" id="dlgBox"></div>
+</div>
+
+<!-- 保存スロットパネル -->
+<div class="slots-panel" id="slotsPanel"></div>
+
+<div id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

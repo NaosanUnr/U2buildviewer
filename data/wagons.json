@@ -1,0 +1,4569 @@
+{
+  "meta": {
+    "source": "https://w.atwiki.jp/unrailed2/pages/40.html",
+    "extracted_at": "2026-07-17",
+    "game": "Unrailed! 2: Back on Track",
+    "level_line_colors": {
+      "1": "灰色",
+      "2": "黄緑",
+      "3": "水色",
+      "4": "紫",
+      "5": "黄色",
+      "6+": "赤"
+    },
+    "notes": [
+      "levels はwikiに記載のある最大レベルまで収録(多くはLv.9以上まで)",
+      "icon はLv.6までのアイコンを収録。Lv.7以上は見た目がLv.6と同じためLv.6のアイコンを流用",
+      "expansion_parts は拡張パーツの装着可否(⭕/×)。note_refはwiki脚注参照"
+    ]
+  },
+  "engines": [
+    {
+      "id": "toy",
+      "name_ja": "おもちゃのエンジン",
+      "hex_nuts": "0個",
+      "initial_wagons": "4台",
+      "water_capacity": "60秒",
+      "start_speed": "1番目の駅",
+      "description": "ストレス解消を求める人のためのおもちゃのエンジン。 クラッシュしても直前の駅から再スタートできて、セーブデータを何度でもロードできるよ。",
+      "notes": "何度でもロードができます。",
+      "icon": "assets/wagons/engine/toy_s.png"
+    },
+    {
+      "id": "steam",
+      "name_ja": "ハイドロ汽車",
+      "hex_nuts": "0個",
+      "initial_wagons": "5台",
+      "water_capacity": "60秒",
+      "start_speed": "1番目の駅",
+      "description": "昔から鉄道建設に使われてきたハイドロ蒸気エンジン。 オーバーヒートを防ぐため、定期的に水を補給する必要がある。",
+      "notes": "標準のエンジン",
+      "icon": "assets/wagons/engine/steam_s.png"
+    },
+    {
+      "id": "ghost",
+      "name_ja": "ゴースト急行",
+      "hex_nuts": "40個",
+      "initial_wagons": "5台",
+      "water_capacity": "40秒",
+      "start_speed": "2番目の駅",
+      "description": "自由自在に通り抜けできるこの世の物とは思えない",
+      "notes": "ワゴン数が増えない。 列車にワゴンを追加するとゴーストの拡張パーツが付く。 エンジンレベルで拡張パーツ数が増える。",
+      "icon": "assets/wagons/engine/ghost_s.png"
+    },
+    {
+      "id": "pusher",
+      "name_ja": "推進式エンジン",
+      "hex_nuts": "20個",
+      "initial_wagons": "6台",
+      "water_capacity": "40秒",
+      "start_speed": "6番目の駅",
+      "description": "列車編成のどこにでも置けるエンジン！ 隣接するワゴンを＋2レベル強化する。",
+      "notes": "ワゴンをどこにでも配置可能 エンジンレベルで隣接数が増える。",
+      "icon": "assets/wagons/engine/pusher_s.png"
+    }
+  ],
+  "wagons": [
+    {
+      "id": "storage",
+      "name_ja": "貨物ワゴン",
+      "category": "normal",
+      "description": "木材と鉄を積んでおくことができる",
+      "levelup_summary": "積載できる資材の数が増える",
+      "game_description": "他のワゴンに必要な木材や鉄を積んでおけるよ。",
+      "tips": [
+        "木材と鉄を積載するためのワゴン。 初期から搭載されている。",
+        "拡張パーツのマグネット吸引を付けると、周囲2マスの資材を自動で搬入してくれるので、レール付近に資材をまとめるだけで良くなる。 ≪吸引範囲≫ １つの場合半径２マス ２つの場合３マス ３つの場合４マス",
+        "積載量が増える。貨物ワゴンには積載量以外の項目がないので、困ったら取り合えず取り付けてOK。",
+        "クラフトワゴンからレールを引き抜いたときに即レール生成が開始できるような環境を作ろう。",
+        "ダイナマイト・回収・採掘等資材を消費するものはなるべく資材を切らさないようにしたい。 付近に必要な資材がないときは貨物ワゴンから取り出そう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/64.html",
+      "icon": {
+        "1": "assets/wagons/1/storage_s1.png",
+        "2": "assets/wagons/2/storage_s2.png",
+        "3": "assets/wagons/3/storage_s3.png",
+        "4": "assets/wagons/4/storage_s4.png",
+        "5": "assets/wagons/5/storage_s5.png",
+        "6": "assets/wagons/6/storage_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "積載量:3",
+          "stats": {
+            "積載量": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "積載量:5",
+          "stats": {
+            "積載量": "5"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "積載量:7",
+          "stats": {
+            "積載量": "7"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "積載量:9",
+          "stats": {
+            "積載量": "9"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "積載量:11",
+          "stats": {
+            "積載量": "11"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "積載量:13",
+          "stats": {
+            "積載量": "13"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "積載量:15",
+          "stats": {
+            "積載量": "15"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "積載量:17",
+          "stats": {
+            "積載量": "17"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "積載量:19",
+          "stats": {
+            "積載量": "19"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true,
+          "note_ref": "*1"
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": true,
+          "note_ref": "*2"
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "collector",
+      "name_ja": "回収ワゴン",
+      "category": "normal",
+      "description": "木材を消費し周囲の資材を回収する",
+      "levelup_summary": "積載できる資材(消費する木材や回収後の資材)が増える / 資材回収範囲が増える / 回収速度も早まる",
+      "game_description": "近くにある資材を回収するよ。",
+      "tips": [
+        "木材を消費し、付近の物資を回収する。",
+        "貨物押し出しで貨物ワゴンに自動搬入するでもいいが、最近のトレンドはフロント引き寄せを貨物ワゴンに入れて貨物ワゴンの前に回収ワゴンを置く運用、こうすることで拡張パーツを入れられる枠が増えスーパーチャージ・ハイドロチャージなど回収ワゴンのレベルを上げられる拡張パーツを多く積める。",
+        "レール生成以外にも、橋掛けとして使用することもあるため。木材は鉄に比べ不足しがち。 マップ の資材量を見て、木材が足りなくなるようなら一時的に運用を止めるのも手。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/65.html",
+      "icon": {
+        "1": "assets/wagons/1/collector_s1.png",
+        "2": "assets/wagons/2/collector_s2.png",
+        "3": "assets/wagons/3/collector_s3.png",
+        "4": "assets/wagons/4/collector_s4.png",
+        "5": "assets/wagons/5/collector_s5.png",
+        "6": "assets/wagons/6/collector_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "稼働時間:15.0秒 資材積載量:1 生産品積載量:3 範囲:5.0m 回収時間:2.5秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "1",
+            "生産品積載量": "3",
+            "範囲": "5.0m",
+            "回収時間": "2.5秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "稼働時間:15.0秒 資材積載量:2 生産品積載量:4 範囲:6.0m 回収時間:2.1秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "2",
+            "生産品積載量": "4",
+            "範囲": "6.0m",
+            "回収時間": "2.1秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "稼働時間:15.0秒 資材積載量:3 生産品積載量:5 範囲:7.0m 回収時間:1.8秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "3",
+            "生産品積載量": "5",
+            "範囲": "7.0m",
+            "回収時間": "1.8秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "稼働時間:15.0秒 資材積載量:4 生産品積載量:6 範囲:8.0m 回収時間:1.4秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "4",
+            "生産品積載量": "6",
+            "範囲": "8.0m",
+            "回収時間": "1.4秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "稼働時間:15.0秒 資材積載量:5 生産品積載量:7 範囲:9.0m 回収時間:1.1秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "5",
+            "生産品積載量": "7",
+            "範囲": "9.0m",
+            "回収時間": "1.1秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:8 範囲:10.0m 回収時間:0.7秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "8",
+            "範囲": "10.0m",
+            "回収時間": "0.7秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:9 範囲:10.4m 回収時間:0.6秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "9",
+            "範囲": "10.4m",
+            "回収時間": "0.6秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:9 範囲:10.8m 回収時間:0.6秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "9",
+            "範囲": "10.8m",
+            "回収時間": "0.6秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:9 範囲:11.2m 回収時間:0.5秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "9",
+            "範囲": "11.2m",
+            "回収時間": "0.5秒"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:10 範囲:11.6m 回収時間:0.4秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "10",
+            "範囲": "11.6m",
+            "回収時間": "0.4秒"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:10 範囲:12.0m 回収時間:0.3秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "10",
+            "範囲": "12.0m",
+            "回収時間": "0.3秒"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "稼働時間:15.0秒 資材積載量:6 生産品積載量:10 範囲:12.4m 回収時間:0.3秒",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "生産品積載量": "10",
+            "範囲": "12.4m",
+            "回収時間": "0.3秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": true
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": true
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": true
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "crafter",
+      "name_ja": "クラフトワゴン",
+      "category": "normal",
+      "description": "木材と鉄を1つずつ積載することで線路を作成できる",
+      "levelup_summary": "生成速度が速くなる / 積載できる線路の数が増える",
+      "game_description": "資材から線路を作れるよ。",
+      "tips": [
+        "鉄と木材を1つずつ消費しレールを生成する。 初期ワゴンとして積載されているワゴン。運用次第でステージのクリア可否に直結する非常に重要なワゴン。",
+        "貨物押し出しがないと貨物ワゴンから資材を運び込めないため、運用できないといっても過言ではない。 初期装備されているクラフトワゴンにはデフォルトで積んであるが、ショップ等で購入し追加する場合はついていない為注意。",
+        "レール運搬を行うプレイヤーの移動導線が短くなることに加え、高難度 マップ に挑戦する際レールが取れずクラッシュしてしまうパターンをケアすることができるため、縛りプレイ等でなければ先頭車両としての運用を強く推奨する。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/66.html",
+      "icon": {
+        "1": "assets/wagons/1/crafter_s1.png",
+        "2": "assets/wagons/2/crafter_s2.png",
+        "3": "assets/wagons/3/crafter_s3.png",
+        "4": "assets/wagons/4/crafter_s4.png",
+        "5": "assets/wagons/5/crafter_s5.png",
+        "6": "assets/wagons/6/crafter_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "クラフト速度:3.5秒 生産品積載量:3",
+          "stats": {
+            "クラフト速度": "3.5秒",
+            "生産品積載量": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "クラフト速度:2.9秒 生産品積載量:5",
+          "stats": {
+            "クラフト速度": "2.9秒",
+            "生産品積載量": "5"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "クラフト速度:2.3秒 生産品積載量:7",
+          "stats": {
+            "クラフト速度": "2.3秒",
+            "生産品積載量": "7"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "クラフト速度:1.7秒 生産品積載量:9",
+          "stats": {
+            "クラフト速度": "1.7秒",
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "クラフト速度:1.1秒 生産品積載量:11",
+          "stats": {
+            "クラフト速度": "1.1秒",
+            "生産品積載量": "11"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "クラフト速度:0.5秒 生産品積載量:13",
+          "stats": {
+            "クラフト速度": "0.5秒",
+            "生産品積載量": "13"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "クラフト速度:0.4秒 生産品積載量:14",
+          "stats": {
+            "クラフト速度": "0.4秒",
+            "生産品積載量": "14"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "クラフト速度:0.3秒 生産品積載量:15",
+          "stats": {
+            "クラフト速度": "0.3秒",
+            "生産品積載量": "15"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "クラフト速度:0.2秒 生産品積載量:16",
+          "stats": {
+            "クラフト速度": "0.2秒",
+            "生産品積載量": "16"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "クラフト速度:0.1秒 生産品積載量:17",
+          "stats": {
+            "クラフト速度": "0.1秒",
+            "生産品積載量": "17"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "クラフト速度:0.0秒 生産品積載量:18",
+          "stats": {
+            "クラフト速度": "0.0秒",
+            "生産品積載量": "18"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "クラフト速度:0.0秒 生産品積載量:19",
+          "stats": {
+            "クラフト速度": "0.0秒",
+            "生産品積載量": "19"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": true
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "cannon",
+      "name_ja": "キャノンカート",
+      "category": "normal",
+      "description": "フラッグを設置した場所に資材を射出できる",
+      "levelup_summary": "積載できる数が増える / 射出できる有効範囲が増える / 射出までのクールタイムが減少する",
+      "game_description": "資材を補充すると発射されるキャノン砲の標的となる旗をマップ上のどこにでも置けるよ。",
+      "tips": [
+        "マップ にフラッグを設置するとキャノン砲から発射したものがフラッグめがけて発射される。 仮想レール機能を使えば複雑な敷設も行える。(フラッグを持った状態で線路を引くような動作を行うことで仮想レールを設置できる)",
+        "フラッグ埋め込みというテクニックを使えばさらに強力な動きが可能(詳細な方法は割愛)",
+        "特別な運用をしない限り特筆するような適正率の拡張パーツはないため、ゴーストをつけておくことが安定択。 ※ワゴンに触れにくくなるので注意",
+        "複雑な敷設や分断をケアした敷設は難しいので注意"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/67.html",
+      "icon": {
+        "1": "assets/wagons/1/cannon_s1.png",
+        "2": "assets/wagons/2/cannon_s2.png",
+        "3": "assets/wagons/3/cannon_s3.png",
+        "4": "assets/wagons/4/cannon_s4.png",
+        "5": "assets/wagons/5/cannon_s5.png",
+        "6": "assets/wagons/6/cannon_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "資材積載量:1 範囲:10.0m 発射感覚:2.0秒",
+          "stats": {
+            "資材積載量": "1",
+            "範囲": "10.0m",
+            "発射感覚": "2.0秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "資材積載量:2 範囲:11.0m 発射感覚:1.7秒",
+          "stats": {
+            "資材積載量": "2",
+            "範囲": "11.0m",
+            "発射感覚": "1.7秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "資材積載量:3 範囲:12.0m 発射感覚:1.4秒",
+          "stats": {
+            "資材積載量": "3",
+            "範囲": "12.0m",
+            "発射感覚": "1.4秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "資材積載量:4 範囲:13.0m 発射感覚:1.1秒",
+          "stats": {
+            "資材積載量": "4",
+            "範囲": "13.0m",
+            "発射感覚": "1.1秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "資材積載量:5 範囲:14.0m 発射感覚:0.8秒",
+          "stats": {
+            "資材積載量": "5",
+            "範囲": "14.0m",
+            "発射感覚": "0.8秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "資材積載量:6 範囲:15.0m 発射感覚:0.5秒",
+          "stats": {
+            "資材積載量": "6",
+            "範囲": "15.0m",
+            "発射感覚": "0.5秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "資材積載量:6 範囲:15.5m 発射感覚:0.4秒",
+          "stats": {
+            "資材積載量": "6",
+            "範囲": "15.5m",
+            "発射感覚": "0.4秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "資材積載量:7 範囲:16.0m 発射感覚:0.4秒",
+          "stats": {
+            "資材積載量": "7",
+            "範囲": "16.0m",
+            "発射感覚": "0.4秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "資材積載量:8 範囲:16.5m 発射感覚:0.4秒",
+          "stats": {
+            "資材積載量": "8",
+            "範囲": "16.5m",
+            "発射感覚": "0.4秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "transformer",
+      "name_ja": "変換ワゴン",
+      "category": "normal",
+      "description": "木材を鉄に、鉄を木材に変換する",
+      "levelup_summary": "積載量が増える / 変換速度が短縮される",
+      "game_description": "木材を鉄に、また鉄を木材に変換できるよ。",
+      "tips": [
+        "木材を鉄に、鉄を木材に変換するワゴン。 特にコストは必要なく、資材1つに対して資材1つが生成される。 ワゴン拡張パーツを活用すれば精製後の資材を貨物ワゴンに搬出したりできるようになる。",
+        "貨物押し出しと貨物引き寄せを装着することで、自動で貨物ワゴンの中身を均してくれるためため非常に強力。",
+        "欲しいタイミングで資材を回収するために、事前に不足する資材にあたりをつけて序盤からコツコツ変換しよう。 わかりやすい当たりのつけ方例→大量の橋掛けが必要。 マップ 全体で資材に大きな偏りがある等。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/68.html",
+      "icon": {
+        "1": "assets/wagons/1/transformer_s1.png",
+        "2": "assets/wagons/2/transformer_s2.png",
+        "3": "assets/wagons/3/transformer_s3.png",
+        "4": "assets/wagons/4/transformer_s4.png",
+        "5": "assets/wagons/5/transformer_s5.png",
+        "6": "assets/wagons/6/transformer_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "積載量:2 変換時間:3.5秒",
+          "stats": {
+            "積載量": "2",
+            "変換時間": "3.5秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "積載量:4 変換時間:2.9秒",
+          "stats": {
+            "積載量": "4",
+            "変換時間": "2.9秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "積載量:6 変換時間:2.3秒",
+          "stats": {
+            "積載量": "6",
+            "変換時間": "2.3秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "積載量:8 変換時間:1.7秒",
+          "stats": {
+            "積載量": "8",
+            "変換時間": "1.7秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "積載量:10 変換時間:1.1秒",
+          "stats": {
+            "積載量": "10",
+            "変換時間": "1.1秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "積載量:12 変換時間:0.5秒",
+          "stats": {
+            "積載量": "12",
+            "変換時間": "0.5秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "積載量:13 変換時間:0.4秒",
+          "stats": {
+            "積載量": "13",
+            "変換時間": "0.4秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "積載量:14 変換時間:0.4秒",
+          "stats": {
+            "積載量": "14",
+            "変換時間": "0.4秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "積載量:15 変換時間:0.3秒",
+          "stats": {
+            "積載量": "15",
+            "変換時間": "0.3秒"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "積載量:16 変換時間:0.3秒",
+          "stats": {
+            "積載量": "16",
+            "変換時間": "0.3秒"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "積載量:17 変換時間:0.2秒",
+          "stats": {
+            "積載量": "17",
+            "変換時間": "0.2秒"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "積載量:18 変換時間:0.2秒",
+          "stats": {
+            "積載量": "18",
+            "変換時間": "0.2秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": true
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": true
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "conveyor",
+      "name_ja": "ベルトコンベアワゴン",
+      "category": "normal",
+      "description": "資材やツールをベルトコンベアを使って運搬できるようになる",
+      "levelup_summary": "支柱の数が増える / 支柱の有効範囲が増える",
+      "game_description": "自由に置ける支柱を提供し、一定距離間をベルトコンベアで資源輸送できるようにするよ。",
+      "tips": [
+        "コミュニティで様々な意見を出し、運用できるように健闘したが、あまりにも使いにくかった結果クビになってしまったワゴン。エンドレス、タイム、VSでは出現しない。(サンドボックスでは触れる)",
+        "支柱を設置すると、アイテム・物資を高速で運搬できるコンベアを立てられる。",
+        "支柱の範囲が広がるためより効率的な運用が可能。",
+        "カーゴ渓谷など列車周りにアクセスしにくいバイオームではより効率的に運用できる。",
+        "不要な支柱を範囲外にすることで対応しよう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/69.html",
+      "icon": {
+        "1": "assets/wagons/1/conveyor_s1.png",
+        "2": "assets/wagons/2/conveyor_s2.png",
+        "3": "assets/wagons/3/conveyor_s3.png",
+        "4": "assets/wagons/4/conveyor_s4.png",
+        "5": "assets/wagons/5/conveyor_s5.png",
+        "6": "assets/wagons/6/conveyor_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "支柱:2 支柱の範囲:7.0m 生産品積載量:3",
+          "stats": {
+            "支柱": "2",
+            "支柱の範囲": "7.0m",
+            "生産品積載量": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "支柱:2 支柱の範囲:8.0m 生産品積載量:4",
+          "stats": {
+            "支柱": "2",
+            "支柱の範囲": "8.0m",
+            "生産品積載量": "4"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "支柱:3 支柱の範囲:9.0m 生産品積載量:5",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "9.0m",
+            "生産品積載量": "5"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "支柱:3 支柱の範囲:11.0m 生産品積載量:6",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "11.0m",
+            "生産品積載量": "6"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "支柱:3 支柱の範囲:12.0m 生産品積載量:7",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "12.0m",
+            "生産品積載量": "7"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "支柱:3 支柱の範囲:13.0m 生産品積載量:8",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "13.0m",
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "支柱:3 支柱の範囲:14.0m 生産品積載量:9",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "14.0m",
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "支柱:3 支柱の範囲:14.0m 生産品積載量:9",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "14.0m",
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "支柱:3 支柱の範囲:15.0m 生産品積載量:9",
+          "stats": {
+            "支柱": "3",
+            "支柱の範囲": "15.0m",
+            "生産品積載量": "9"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": true
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "magnet",
+      "name_ja": "マグネットワゴン",
+      "category": "normal",
+      "description": "周辺にある資材を即座にワゴン付近にまとめる(積み込んだ資材のみ有効)",
+      "levelup_summary": "積み込める資材が増える / 資材回収範囲が広がる",
+      "game_description": "ワゴンに資材を置くと同種の資材を引き寄せるよ。",
+      "tips": [
+        "積載した物資を消費して同種の物資を一度に回収する。",
+        "収集できる範囲が回収ワゴンより狭いため範囲拡張で広げることも効果的。",
+        "マグネットワゴンで回収した資材をマグネット吸引で回収→圧縮資材を貨物押し出しで貨物ワゴンに搬出する動きを目指すことで、通常の何倍も資材を集積できる。 マグネット吸引は資材の集まりがよいため有用。 ※上級者向け",
+        "鉄、木材、レールと積載可能な物資が多く、混ぜて積載することもできてしまう。気が付いたらすべてのマグネットワゴンが木材を回収していたなんてこともちらほら。 明確にこのワゴンは木材用。鉄用と分けて運用することを推奨。",
+        "一番初めに積んだ資材を回収する。複数の資材を積んだ場合は、資材が尽きるまで同じ物資を回収し続けるため、尽きないようにしっかりと管理しましょう。",
+        "ダイナマイト等で大量に資材を確保することでよりこのワゴンの効果を実感することができる。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/70.html",
+      "icon": {
+        "1": "assets/wagons/1/magnet_s1.png",
+        "2": "assets/wagons/2/magnet_s2.png",
+        "3": "assets/wagons/3/magnet_s3.png",
+        "4": "assets/wagons/4/magnet_s4.png",
+        "5": "assets/wagons/5/magnet_s5.png",
+        "6": "assets/wagons/6/magnet_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "稼働時間:15.0秒 資材積載量:1 範囲:3.0m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "1",
+            "範囲": "3.0m"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "稼働時間:15.0秒 資材積載量:2 範囲:3.8m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "2",
+            "範囲": "3.8m"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "稼働時間:15.0秒 資材積載量:3 範囲:4.6m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "3",
+            "範囲": "4.6m"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "稼働時間:15.0秒 資材積載量:4 範囲:5.4m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "4",
+            "範囲": "5.4m"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "稼働時間:15.0秒 資材積載量:5 範囲:6.2m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "5",
+            "範囲": "6.2m"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:7.0m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "7.0m"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:7.3m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "7.3m"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:7.6m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "7.6m"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:7.9m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "7.9m"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:8.2m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "8.2m"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:8.5m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "8.5m"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "稼働時間:15.0秒 資材積載量:6 範囲:8.8m",
+          "stats": {
+            "稼働時間": "15.0秒",
+            "資材積載量": "6",
+            "範囲": "8.8m"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": true
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "carriage",
+      "name_ja": "輸送ワゴン",
+      "category": "normal",
+      "description": "2枠の積載枠を持ち、持てるものなら何でも積んでおくことができる(鉄、木材、レール、動物、ダイナマイト等)",
+      "levelup_summary": "積載できる量が増える(スタックできるものなら)",
+      "game_description": "持てるものは何でも運べるよ！",
+      "tips": [
+        "スタックできないものを運べるという稀有な特性を活かそう。 その場合積載量は不要なのでレベルは上げなくても良いのも魅力。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/71.html",
+      "icon": {
+        "1": "assets/wagons/1/carriage_s1.png",
+        "2": "assets/wagons/2/carriage_s2.png",
+        "3": "assets/wagons/3/carriage_s3.png",
+        "4": "assets/wagons/4/carriage_s4.png",
+        "5": "assets/wagons/5/carriage_s5.png",
+        "6": "assets/wagons/6/carriage_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "積載量:6",
+          "stats": {
+            "積載量": "6"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "積載量:8",
+          "stats": {
+            "積載量": "8"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "積載量:10",
+          "stats": {
+            "積載量": "10"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "積載量:12",
+          "stats": {
+            "積載量": "12"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "積載量:14",
+          "stats": {
+            "積載量": "14"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "積載量:16",
+          "stats": {
+            "積載量": "16"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "積載量:18",
+          "stats": {
+            "積載量": "18"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "積載量:20",
+          "stats": {
+            "積載量": "20"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "積載量:21",
+          "stats": {
+            "積載量": "21"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "dynamite",
+      "name_ja": "ダイナマイトワゴン",
+      "category": "normal",
+      "description": "鉄を使用し、ダイナマイトを作成することができる",
+      "levelup_summary": "爆破範囲が広がる / 設置してから爆発するまでの時間が短縮される",
+      "game_description": "鉄からダイナマイトを作れるよ。取り扱いには気を付けて！",
+      "tips": [
+        "鉄を搬入すると一定時間後にダイナマイトを生成する。 レベルが高い物だとより広範囲を爆破出来るが、その分設置から爆発までの時間が短くなる。",
+        "前作は35秒で完成していたが今作はLv.6までは40秒かかるたる。",
+        "貨物ワゴンに鉄があれば自動的にダイナマイトワゴンに搬入してくれる。 少人数でダイナマイトを運用するときや、初心者の方にお勧め。",
+        "ダイナマイトを利用すると大量の資材を作成できる。 回収ワゴンと併用することで運搬の負担が減る。",
+        "開拓したい場所にツールで数マス穴を開けてそこにダイナマイトを差し込むことでより効率的な運用ができる。(通称ポケット)",
+        "ダイナマイトは生成に時間がかかる。極力常にダイナマイトを生成している状態を作り、完成したダイナマイトを放置しないようにしよう。",
+        "もしダイナマイトが余っていたら、最後にダイナマイトを抜き取っておこう。 今作はマップを跨いでも地面にダイナマイトを落とさなくなったので、次のダイナマイトを作成しながら、次マップの初動を安定させることができる"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/72.html",
+      "icon": {
+        "1": "assets/wagons/1/dynamite_s1.png",
+        "2": "assets/wagons/2/dynamite_s2.png",
+        "3": "assets/wagons/3/dynamite_s3.png",
+        "4": "assets/wagons/4/dynamite_s4.png",
+        "5": "assets/wagons/5/dynamite_s5.png",
+        "6": "assets/wagons/6/dynamite_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "クラフト速度:40.0秒 爆風範囲:2.0m 導火線時間:3.0秒",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "爆風範囲": "2.0m",
+            "導火線時間": "3.0秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "クラフト速度:40.0秒 爆風範囲:3.0m 導火線時間:2.7秒",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "爆風範囲": "3.0m",
+            "導火線時間": "2.7秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "クラフト速度:40.0秒 爆風範囲:4.0m 導火線時間:2.4秒",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "爆風範囲": "4.0m",
+            "導火線時間": "2.4秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "クラフト速度:40.0秒 爆風範囲:5.0m 導火線時間:2.1秒",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "爆風範囲": "5.0m",
+            "導火線時間": "2.1秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "クラフト速度:40.0秒 爆風範囲:6.0m 導火線時間:1.8秒",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "爆風範囲": "6.0m",
+            "導火線時間": "1.8秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "クラフト速度:40.0秒 爆風範囲:7.0m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "爆風範囲": "7.0m",
+            "導火線時間": "1.5秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "クラフト速度:39.0秒 爆風範囲:7.5m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "39.0秒",
+            "爆風範囲": "7.5m",
+            "導火線時間": "1.5秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "クラフト速度:38.0秒 爆風範囲:8.0m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "38.0秒",
+            "爆風範囲": "8.0m",
+            "導火線時間": "1.5秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "クラフト速度:37.0秒 爆風範囲:8.5m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "37.0秒",
+            "爆風範囲": "8.5m",
+            "導火線時間": "1.5秒"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "クラフト速度:36.0秒 爆風範囲:9.0m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "36.0秒",
+            "爆風範囲": "9.0m",
+            "導火線時間": "1.5秒"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "クラフト速度:35.0秒 爆風範囲:9.5m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "35.0秒",
+            "爆風範囲": "9.5m",
+            "導火線時間": "1.5秒"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "クラフト速度:34.0秒 爆風範囲:10.0m 導火線時間:1.5秒",
+          "stats": {
+            "クラフト速度": "34.0秒",
+            "爆風範囲": "10.0m",
+            "導火線時間": "1.5秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": true
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "slot",
+      "name_ja": "スロットワゴン",
+      "category": "normal",
+      "description": "当たれば資材やレールダイナマイトを入手できる ※はずれを引くと炎上する",
+      "levelup_summary": "もらえる資材量がふえる / ダイナマイトのレベルが上がる",
+      "game_description": "線路上のスロットマシン。ワゴンにダッシュして運試してみよう。",
+      "tips": [
+        "タックルすると、抽選が開始され、鉄、木材、レール、ダイナマイトなどの資材を確率で入手できる。 はずれを引くと、炎上する。",
+        "ワゴンに搬入したり、搬出する要素がないので、ゴースト化した時のデメリットが少ない。",
+        "ダイナマイトが出た時に一時保持することができる。ダイナマイトワゴンと違いワゴンで保持できないので活躍できるシーンは増える。",
+        "はずれを引くと炎上する。しっかりと水源を確保して対策しよう。",
+        "カートリッジのラッキーパンチには、スロットの当選確率を上げる効果がある。活用しよう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/73.html",
+      "icon": {
+        "1": "assets/wagons/1/slot_s1.png",
+        "2": "assets/wagons/2/slot_s2.png",
+        "3": "assets/wagons/3/slot_s3.png",
+        "4": "assets/wagons/4/slot_s4.png",
+        "5": "assets/wagons/5/slot_s5.png",
+        "6": "assets/wagons/6/slot_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "待機時間:5.0秒 生産品積載量:1",
+          "stats": {
+            "待機時間": "5.0秒",
+            "生産品積載量": "1"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "待機時間:4.5秒 生産品積載量:2",
+          "stats": {
+            "待機時間": "4.5秒",
+            "生産品積載量": "2"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "待機時間:4.0秒 生産品積載量:3",
+          "stats": {
+            "待機時間": "4.0秒",
+            "生産品積載量": "3"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "待機時間:3.5秒 生産品積載量:4",
+          "stats": {
+            "待機時間": "3.5秒",
+            "生産品積載量": "4"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "待機時間:3.0秒 生産品積載量:5",
+          "stats": {
+            "待機時間": "3.0秒",
+            "生産品積載量": "5"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "待機時間:2.5秒 生産品積載量:6",
+          "stats": {
+            "待機時間": "2.5秒",
+            "生産品積載量": "6"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "待機時間:2.3秒 生産品積載量:6",
+          "stats": {
+            "待機時間": "2.3秒",
+            "生産品積載量": "6"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "待機時間:2.2秒 生産品積載量:7",
+          "stats": {
+            "待機時間": "2.2秒",
+            "生産品積載量": "7"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "待機時間:2.0秒 生産品積載量:7",
+          "stats": {
+            "待機時間": "2.0秒",
+            "生産品積載量": "7"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "待機時間:1.9秒 生産品積載量:8",
+          "stats": {
+            "待機時間": "1.9秒",
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "待機時間:1.7秒 生産品積載量:8",
+          "stats": {
+            "待機時間": "1.7秒",
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "待機時間:1.6秒 生産品積載量:9",
+          "stats": {
+            "待機時間": "1.6秒",
+            "生産品積載量": "9"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "miner",
+      "name_ja": "採掘ワゴン",
+      "category": "normal",
+      "description": "鉄を消費しワゴンの横を一直線に開拓する ※ワゴンにタックルすることで縦開拓モードに切り替え可能",
+      "levelup_summary": "鉄を積載できる数が増える / 開拓範囲が広がる / 開拓速度が速まる",
+      "game_description": "近くにある資材を自動で採掘するよ。ダッシュして方向を変更できるよ。",
+      "tips": [
+        "開拓速度を効率的に高められる。列車の速度が上がると、壊しきれない資材が発生する可能性があるので、ケアとして使える。",
+        "搬入のみなので当たり判定がわかりにくいというデメリットを大きく受けない。",
+        "ワゴン名の隣の()はシナジーを生かすためにつけるべき拡張パーツです。 取り付けるのは採掘ワゴン側ではないので注意",
+        "遠方の資材を開拓できるが、搬入まで時間がかかってしまう。回収ワゴンで回収・運搬のコストを下げよう。",
+        "回収ワゴンと同様の理由。",
+        "ワゴンにタックルすることで、列車の進行方向側へ開拓の方向を切り替えることができる。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/74.html",
+      "icon": {
+        "1": "assets/wagons/1/miner_s1.png",
+        "2": "assets/wagons/2/miner_s2.png",
+        "3": "assets/wagons/3/miner_s3.png",
+        "4": "assets/wagons/4/miner_s4.png",
+        "5": "assets/wagons/5/miner_s5.png",
+        "6": "assets/wagons/6/miner_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "稼働時間:20.0秒 資材積載量:1 範囲3.0m 採掘間隔:5.0秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "1",
+            "採掘間隔": "5.0秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "稼働時間:20.0秒 資材積載量:2 範囲4.0m 採掘間隔:4.3秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "2",
+            "採掘間隔": "4.3秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "稼働時間:20.0秒 資材積載量:3 範囲5.0m 採掘間隔:3.6秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "3",
+            "採掘間隔": "3.6秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "稼働時間:20.0秒 資材積載量:4 範囲6.0m 採掘間隔:2.9秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "4",
+            "採掘間隔": "2.9秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "稼働時間:20.0秒 資材積載量:5 範囲7.0m 採掘間隔:2.2秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "5",
+            "採掘間隔": "2.2秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "稼働時間:20.0秒 資材積載量:6 範囲8.0m 採掘間隔:1.5秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "6",
+            "採掘間隔": "1.5秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "稼働時間:20.0秒 資材積載量:6 範囲8.8m 採掘間隔:1.4秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "6",
+            "採掘間隔": "1.4秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "稼働時間:20.0秒 資材積載量:7 範囲9.6m 採掘間隔:1.4秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "7",
+            "採掘間隔": "1.4秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "稼働時間:20.0秒 資材積載量:7 範囲9.8m 採掘間隔:1.3秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "7",
+            "採掘間隔": "1.3秒"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "稼働時間:20.0秒 資材積載量:8 範囲10.4m 採掘間隔:1.3秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "8",
+            "採掘間隔": "1.3秒"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "稼働時間:20.0秒 資材積載量:8 範囲11.0m 採掘間隔:1.2秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "8",
+            "採掘間隔": "1.2秒"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "稼働時間:20.0秒 資材積載量:9 範囲11.6m 採掘間隔:1.2秒",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "9",
+            "採掘間隔": "1.2秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": true
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "torpedo",
+      "name_ja": "魚雷ワゴン",
+      "category": "normal",
+      "description": "鉄を消費し一直線に飛ぶ魚雷を作成できる。魚雷は耐久(ヒット数)を失うか破壊不能なオブジェクトにあたるまで進む",
+      "levelup_summary": "耐久値(ヒット数)が増える",
+      "game_description": "鉄からまっすぐ飛ぶ魚雷を作り、邪魔な物や人を破壊できるよ。",
+      "tips": [
+        "ヒット数が0になるまで直進する。耐久値だと考えると理解しやすい。 硬いものを破壊するとより多くのヒット数を消費する。",
+        "滞りなく生成するために鉄を自動で搬入できるようなると管理が楽になる。",
+        "カーゴ渓谷の赤壁やボイラー荒地のガラクタゴーレムなどはダイナマイトでも破壊しきれないため魚雷を使うのも有効。",
+        "反射するので折り返してきた魚雷にあたらないように注意"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/75.html",
+      "icon": {
+        "1": "assets/wagons/1/torpedo_s1.png",
+        "2": "assets/wagons/2/torpedo_s2.png",
+        "3": "assets/wagons/3/torpedo_s3.png",
+        "4": "assets/wagons/4/torpedo_s4.png",
+        "5": "assets/wagons/5/torpedo_s5.png",
+        "6": "assets/wagons/6/torpedo_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:8",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "8"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:16",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "16"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:24",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "24"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:33",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "33"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:41",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "41"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:49",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "49"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:55",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "55"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:60",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "60"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:65",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "65"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:70",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "70"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:75",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "75"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "クラフト速度:40.0秒 魚雷ヒット数:80",
+          "stats": {
+            "クラフト速度": "40.0秒",
+            "魚雷ヒット数": "80"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": true
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": true
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "turret",
+      "name_ja": "タレットタワー",
+      "category": "normal",
+      "description": "付近にある破壊できるものを打ち続ける。タレット部分は持ち運び可能 ※使用し続けると炎上する",
+      "levelup_summary": "射程が伸びる / 発射間隔が狭まる",
+      "game_description": "破壊できるものなら何でも撃てるけど、撃ち続けるとオーバーヒートするよ。",
+      "tips": [
+        "付近のものを撃ち続けるタレットが乗ったワゴン。 タレット部分を持ち運ぶこともできる。",
+        "水容量がデフォルトの数字として存在する唯一のワゴンなので、タンクワゴンで安定を取るのも選択肢となる。",
+        "第三のツールとして活用もできる。水残量に注意しながら活用しよう。",
+        "蓮の葉などを破壊してしまう可能性が高いため、破壊されても大丈夫な立ち回りを心がけよう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/76.html",
+      "icon": {
+        "1": "assets/wagons/1/turret_s1.png",
+        "2": "assets/wagons/2/turret_s2.png",
+        "3": "assets/wagons/3/turret_s3.png",
+        "4": "assets/wagons/4/turret_s4.png",
+        "5": "assets/wagons/5/turret_s5.png",
+        "6": "assets/wagons/6/turret_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "範囲:2.0m 発射間隔:1.7秒 水容量:50.0秒",
+          "stats": {
+            "範囲": "2.0m",
+            "発射間隔": "1.7秒",
+            "水容量": "50.0秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "範囲:3.0m 発射間隔:1.4秒 水容量:48.0秒",
+          "stats": {
+            "範囲": "3.0m",
+            "発射間隔": "1.4秒",
+            "水容量": "48.0秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "範囲:4.0m 発射間隔:1.2秒 水容量:46.0秒",
+          "stats": {
+            "範囲": "4.0m",
+            "発射間隔": "1.2秒",
+            "水容量": "46.0秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "範囲:5.0m 発射間隔:1.0秒 水容量:44.0秒",
+          "stats": {
+            "範囲": "5.0m",
+            "発射間隔": "1.0秒",
+            "水容量": "44.0秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "範囲:6.0m 発射間隔:0.7秒 水容量:42.0秒",
+          "stats": {
+            "範囲": "6.0m",
+            "発射間隔": "0.7秒",
+            "水容量": "42.0秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "範囲:7.0m 発射間隔:0.5秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "7.0m",
+            "発射間隔": "0.5秒",
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "範囲:7.7m 発射間隔:0.4秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "7.7m",
+            "発射間隔": "0.4秒",
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "範囲:8.4m 発射間隔:0.4秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "8.4m",
+            "発射間隔": "0.4秒",
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "範囲:9.1m 発射間隔:0.3秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "9.1m",
+            "発射間隔": "0.3秒",
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "範囲:9.8m 発射間隔:0.3秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "9.8m",
+            "発射間隔": "0.3秒",
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "範囲:10.5m 発射間隔:0.3秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "10.5m",
+            "発射間隔": "0.3秒",
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "範囲:11.2m 発射間隔:0.2秒 水容量:40.0秒",
+          "stats": {
+            "範囲": "11.2m",
+            "発射間隔": "0.2秒",
+            "水容量": "40.0秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": false
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": false
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": false
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "brake",
+      "name_ja": "ブレーキワゴン",
+      "category": "normal",
+      "description": "ワゴンに数回ダッシュすると列車を一時的に停止させることができる",
+      "levelup_summary": "クールタイムが減少する / 効果時間が延びる",
+      "game_description": "列車の速度を落としてくれるよ。ダッシュして稼働しよう！",
+      "tips": [
+        "2回タックルすることで列車を一時的に停止させることができる。",
+        "今作はスタート時のスペースが少ないパターンが頻出するため、ブレーキを活用しよう"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/77.html",
+      "icon": {
+        "1": "assets/wagons/1/brake_s1.png",
+        "2": "assets/wagons/2/brake_s2.png",
+        "3": "assets/wagons/3/brake_s3.png",
+        "4": "assets/wagons/4/brake_s4.png",
+        "5": "assets/wagons/5/brake_s5.png",
+        "6": "assets/wagons/6/brake_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "再充填速度:300.0秒 稼働時間:7.0秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "300.0秒",
+            "稼働時間": "7.0秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "再充填速度:264.0秒 稼働時間:8.2秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "264.0秒",
+            "稼働時間": "8.2秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "再充填速度:228.0秒 稼働時間:9.4秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "228.0秒",
+            "稼働時間": "9.4秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "再充填速度:192.0秒 稼働時間:10.6秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "192.0秒",
+            "稼働時間": "10.6秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "再充填速度:156.0秒 稼働時間:11.8秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "156.0秒",
+            "稼働時間": "11.8秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "再充填速度:120.0秒 稼働時間:13.0秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "120.0秒",
+            "稼働時間": "13.0秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "再充填速度:114.0秒 稼働時間:13.7秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "114.0秒",
+            "稼働時間": "13.7秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "再充填速度:108.0秒 稼働時間:14.4秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "108.0秒",
+            "稼働時間": "14.4秒",
+            "稼働回数": "1"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "再充填速度:102.0秒 稼働時間:15.1秒 稼働回数:1",
+          "stats": {
+            "再充填速度": "102.0秒",
+            "稼働時間": "15.1秒",
+            "稼働回数": "1"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": true
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "ghost",
+      "name_ja": "ゴーストワゴン",
+      "category": "normal",
+      "description": "このワゴンと周囲のワゴンを透明化し、通り抜けられるようにする",
+      "levelup_summary": "より遠いワゴンも透明化する",
+      "game_description": "向こう側に行けるよ。変な意味じゃなくてね。",
+      "tips": [
+        "レールの敷き方をミスしてクラッシュしてしまうケースは多い。 先頭車両以外すべて通り抜けできるようにすれば事故率を減らすことができる。",
+        "ワゴンに何の資材が乗っているのか確認しにくくなる。 当たり判定も変わるので何度も搬入するワゴンを透明化するなら注意が必要。",
+        "2つ付けるとエンジンも透明になる裏ワザが存在する"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/78.html",
+      "icon": {
+        "1": "assets/wagons/1/ghost_s1.png",
+        "2": "assets/wagons/2/ghost_s2.png",
+        "3": "assets/wagons/3/ghost_s3.png",
+        "4": "assets/wagons/4/ghost_s4.png",
+        "5": "assets/wagons/5/ghost_s5.png",
+        "6": "assets/wagons/6/ghost_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "隣接範囲:0",
+          "stats": {
+            "隣接範囲": "0"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "隣接範囲:1",
+          "stats": {
+            "隣接範囲": "1"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "隣接範囲:2",
+          "stats": {
+            "隣接範囲": "2"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "隣接範囲:3",
+          "stats": {
+            "隣接範囲": "3"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "隣接範囲:4",
+          "stats": {
+            "隣接範囲": "4"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "隣接範囲:5",
+          "stats": {
+            "隣接範囲": "5"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "隣接範囲:5",
+          "stats": {
+            "隣接範囲": "5"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "隣接範囲:6",
+          "stats": {
+            "隣接範囲": "6"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "隣接範囲:6",
+          "stats": {
+            "隣接範囲": "6"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": false
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": {
+        "type": "ghost",
+        "stat_key": "隣接範囲",
+        "note": "隣接範囲Nは前後N台のワゴンに効果が及ぶ"
+      }
+    },
+    {
+      "id": "tank",
+      "name_ja": "タンクワゴン",
+      "category": "normal",
+      "description": "水を消費するワゴン、エンジンの代わりにタンク内の水が尽きるまで肩代わりする",
+      "levelup_summary": "保持できる水が増える",
+      "game_description": "水が必要なワゴンのために水を貯められるよ。バケツで補充できるよ。",
+      "tips": [
+        "複数のワゴンにハイドロチャージを積んで水管理がきついときは、タンクワゴンに水をかけ続けるだけで対応できるようになるため有効"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/79.html",
+      "icon": {
+        "1": "assets/wagons/1/tank_s1.png",
+        "2": "assets/wagons/2/tank_s2.png",
+        "3": "assets/wagons/3/tank_s3.png",
+        "4": "assets/wagons/4/tank_s4.png",
+        "5": "assets/wagons/5/tank_s5.png",
+        "6": "assets/wagons/6/tank_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "水容量:30.0秒",
+          "stats": {
+            "水容量": "30.0秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "水容量:40.0秒",
+          "stats": {
+            "水容量": "40.0秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "水容量:50.0秒",
+          "stats": {
+            "水容量": "50.0秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "水容量:60.0秒",
+          "stats": {
+            "水容量": "60.0秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "水容量:70.0秒",
+          "stats": {
+            "水容量": "70.0秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "水容量:80.0秒",
+          "stats": {
+            "水容量": "80.0秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "水容量:90.0秒",
+          "stats": {
+            "水容量": "90.0秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "水容量:100.0秒",
+          "stats": {
+            "水容量": "100.0秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "水容量:110.0秒",
+          "stats": {
+            "水容量": "110.0秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "supercharger",
+      "name_ja": "スーパーチャージワゴン",
+      "category": "normal",
+      "description": "鉄を消費して周囲のワゴンのレベルを1上げる",
+      "levelup_summary": "より遠いワゴンのレベルも上げる",
+      "game_description": "両端のワゴンのレベルを上げられるよ。",
+      "tips": [
+        "Lv.6で概ね隣接範囲等は事足りるので、利便性を高める拡張パーツがおすすめ。",
+        "デフォルトだと20秒で1つ消費するため、時間延長でコスパを高めるのもおすすめ。",
+        "序盤で効果範囲が足りないときは、クラフトやダイナマイトのレベル上げに使おう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/80.html",
+      "icon": {
+        "1": "assets/wagons/1/supercharger_s1.png",
+        "2": "assets/wagons/2/supercharger_s2.png",
+        "3": "assets/wagons/3/supercharger_s3.png",
+        "4": "assets/wagons/4/supercharger_s4.png",
+        "5": "assets/wagons/5/supercharger_s5.png",
+        "6": "assets/wagons/6/supercharger_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "稼働時間:20.0秒 資材積載量:1 隣接範囲:1",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "1",
+            "隣接範囲": "1"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "稼働時間:20.0秒 資材積載量:2 隣接範囲:2",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "2",
+            "隣接範囲": "2"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "稼働時間:20.0秒 資材積載量:3 隣接範囲:3",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "3",
+            "隣接範囲": "3"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "稼働時間:20.0秒 資材積載量:4 隣接範囲:4",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "4",
+            "隣接範囲": "4"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "稼働時間:20.0秒 資材積載量:5 隣接範囲:5",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "5",
+            "隣接範囲": "5"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "稼働時間:20.0秒 資材積載量:6 隣接範囲:6",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "6",
+            "隣接範囲": "6"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "稼働時間:20.0秒 資材積載量:6 隣接範囲:6",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "6",
+            "隣接範囲": "6"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "稼働時間:20.0秒 資材積載量:7 隣接範囲:7",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "7",
+            "隣接範囲": "7"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "稼働時間:20.0秒 資材積載量:7 隣接範囲:7",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "7",
+            "隣接範囲": "7"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "稼働時間:20.0秒 資材積載量:8 隣接範囲:8",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "8",
+            "隣接範囲": "8"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "稼働時間:20.0秒 資材積載量:8 隣接範囲:8",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "8",
+            "隣接範囲": "8"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "稼働時間:20.0秒 資材積載量:9 隣接範囲:9",
+          "stats": {
+            "稼働時間": "20.0秒",
+            "資材積載量": "9",
+            "隣接範囲": "9"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": true
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": {
+        "type": "supercharge",
+        "stat_key": "隣接範囲",
+        "note": "隣接範囲Nは前後N台のワゴンに効果が及ぶ"
+      }
+    },
+    {
+      "id": "compactor",
+      "name_ja": "圧縮ワゴン",
+      "category": "normal",
+      "description": "鉄や木材を5つ消費して圧縮した資材を生み出す ※圧縮された資材は資材5個分の効果を持つ",
+      "levelup_summary": "より速く圧縮できる / 積載できる圧縮資材が増える",
+      "game_description": "資材を圧縮して、一個の高付加価値資源にまとめられるよ。",
+      "tips": [
+        "貨物引き寄せで貨物ワゴンから資材を回収⇒貨物押し出しで貨物ワゴンに戻すことで無駄なく圧縮作業を行うことができる。",
+        "次のマップへ引き継げる資材が最大5倍程度まで増やせる。各マップでコツコツと引継ぎ資材を増やし、高難度マップ等を切り抜ける力をつけよう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/81.html",
+      "icon": {
+        "1": "assets/wagons/1/compactor_s1.png",
+        "2": "assets/wagons/2/compactor_s2.png",
+        "3": "assets/wagons/3/compactor_s3.png",
+        "4": "assets/wagons/4/compactor_s4.png",
+        "5": "assets/wagons/5/compactor_s5.png",
+        "6": "assets/wagons/6/compactor_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "待機時間:8.0秒 生産品積載量:1 圧縮率:5",
+          "stats": {
+            "待機時間": "8.0秒",
+            "生産品積載量": "1",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "待機時間:7.0秒 生産品積載量:1 圧縮率:5",
+          "stats": {
+            "待機時間": "7.0秒",
+            "生産品積載量": "1",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "待機時間:6.0秒 生産品積載量:2 圧縮率:5",
+          "stats": {
+            "待機時間": "6.0秒",
+            "生産品積載量": "2",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "待機時間:5.0秒 生産品積載量:3 圧縮率:5",
+          "stats": {
+            "待機時間": "5.0秒",
+            "生産品積載量": "3",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "待機時間:4.0秒 生産品積載量:4 圧縮率:5",
+          "stats": {
+            "待機時間": "4.0秒",
+            "生産品積載量": "4",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "待機時間:3.0秒 生産品積載量:4 圧縮率:5",
+          "stats": {
+            "待機時間": "3.0秒",
+            "生産品積載量": "4",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "待機時間:2.7秒 生産品積載量:5 圧縮率:5",
+          "stats": {
+            "待機時間": "2.7秒",
+            "生産品積載量": "5",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "待機時間:2.5秒 生産品積載量:6 圧縮率:5",
+          "stats": {
+            "待機時間": "2.5秒",
+            "生産品積載量": "6",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "待機時間:2.2秒 生産品積載量:6 圧縮率:5",
+          "stats": {
+            "待機時間": "2.2秒",
+            "生産品積載量": "6",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "待機時間:2.0秒 生産品積載量:7 圧縮率:5",
+          "stats": {
+            "待機時間": "2.0秒",
+            "生産品積載量": "7",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "待機時間:1.7秒 生産品積載量:7 圧縮率:5",
+          "stats": {
+            "待機時間": "1.7秒",
+            "生産品積載量": "7",
+            "圧縮率": "5"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "待機時間:1.5秒 生産品積載量:8 圧縮率:5",
+          "stats": {
+            "待機時間": "1.5秒",
+            "生産品積載量": "8",
+            "圧縮率": "5"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": false
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": false
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": false
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "milk",
+      "name_ja": "ミルクワゴン",
+      "category": "normal",
+      "description": "動物を接続することでバフを得られるミルクを生産できる。ワゴンにダッシュすることでバフを得られる。バケツを置くことでバケツにミルクを溜めることができる ※動物ごとにバフ内容が異なる",
+      "levelup_summary": "より多くのミルクを貯蔵できる",
+      "game_description": "動物をワゴンにつなげてミルクを搾り取るよ。ダッシュして一口飲んだり、バケツに入れて後で飲んだりできるよ。ミルクは健康にいいからね。",
+      "tips": [
+        "Lv.6の時点で効果が充分なので、透明化等で利便性を上げよう。 ミルクの残量が見えにくくなるので注意。",
+        "列車と壁に挟まれて稀に動物が死んでしまうので注意。",
+        "付与される効果 鹿(モノレール平原):バカヂカラ5つ カエル(ボックスカー湿原):トーチ5つ ワニ(カーゴ渓谷):スタッキング5つ カニ(アイランドIC):マルチツール5つ ゴミスライム(ボイラー荒地):バケツ5つ",
+        "ミルクを完全に尽かさない(1度以上使用できる)状態を維持している限り、繋いでいない動物のバフ効果も得ることができる。 飲み切らない運用を徹底すれば動物1匹ですべてのバフを享受できる。(通称継ぎ足し)"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/82.html",
+      "icon": {
+        "1": "assets/wagons/1/milk_s1.png",
+        "2": "assets/wagons/2/milk_s2.png",
+        "3": "assets/wagons/3/milk_s3.png",
+        "4": "assets/wagons/4/milk_s4.png",
+        "5": "assets/wagons/5/milk_s5.png",
+        "6": "assets/wagons/6/milk_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "最大動物数:3 ロープ範囲:4.0m 搾乳時間10.0秒",
+          "stats": {
+            "最大動物数": "3",
+            "ロープ範囲": "4.0m"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "最大動物数:4 ロープ範囲:4.0m 搾乳時間9.0秒",
+          "stats": {
+            "最大動物数": "4",
+            "ロープ範囲": "4.0m"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "最大動物数:5 ロープ範囲:5.0m 搾乳時間8.0秒",
+          "stats": {
+            "最大動物数": "5",
+            "ロープ範囲": "5.0m"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "最大動物数:7 ロープ範囲:6.0m 搾乳時間7.0秒",
+          "stats": {
+            "最大動物数": "7",
+            "ロープ範囲": "6.0m"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "最大動物数:8 ロープ範囲:7.0m 搾乳時間6.0秒",
+          "stats": {
+            "最大動物数": "8",
+            "ロープ範囲": "7.0m"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "最大動物数:9 ロープ範囲:7.0m 搾乳時間5.0秒",
+          "stats": {
+            "最大動物数": "9",
+            "ロープ範囲": "7.0m"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "最大動物数:10 ロープ範囲:8.0m 搾乳時間4.5秒",
+          "stats": {
+            "最大動物数": "10",
+            "ロープ範囲": "8.0m"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "最大動物数:11 ロープ範囲:8.0m 搾乳時間4.0秒",
+          "stats": {
+            "最大動物数": "11",
+            "ロープ範囲": "8.0m"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "最大動物数:11 ロープ範囲:9.0m 搾乳時間3.5秒",
+          "stats": {
+            "最大動物数": "11",
+            "ロープ範囲": "9.0m"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": true
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "piggy",
+      "name_ja": "貯金箱ワゴン",
+      "category": "special",
+      "description": "木材か鉄を食べさせることでボルトを生成してくれる ※モノレール平原で入手可能",
+      "levelup_summary": "1ボルトを生み出すまでに必要な資材量が減少する / 積載できる資材が増える",
+      "game_description": "貯金箱に木や鉄を入れてボルトを集めよう！",
+      "tips": [
+        "レベルを上げることでボルト生成効率が上がる。",
+        "早くこのワゴンを完成させることができればその恩恵も大きく受けることができる。特に草原の序盤はマップ難易度も高くないので早めにLv.6まで上げるのも手(6以降は余裕があればでOK)",
+        "4レベルまで上げて、2レベルはスーパーチャージの拡張で上げることで、消費ボルトを節約できる。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/83.html",
+      "icon": {
+        "1": "assets/wagons/1/piggy_s1.png",
+        "2": "assets/wagons/2/piggy_s2.png",
+        "3": "assets/wagons/3/piggy_s3.png",
+        "4": "assets/wagons/4/piggy_s4.png",
+        "5": "assets/wagons/5/piggy_s5.png",
+        "6": "assets/wagons/6/piggy_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "1ボルトあたりの資材:30 一駅あたりの最大貯金:30 資材積載量:3",
+          "stats": {
+            "1ボルトあたりの資材": "30",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "1ボルトあたりの資材:26 一駅あたりの最大貯金:30 資材積載量:4",
+          "stats": {
+            "1ボルトあたりの資材": "26",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "4"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "1ボルトあたりの資材:22 一駅あたりの最大貯金:30 資材積載量:5",
+          "stats": {
+            "1ボルトあたりの資材": "22",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "5"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "1ボルトあたりの資材:18 一駅あたりの最大貯金:30 資材積載量:7",
+          "stats": {
+            "1ボルトあたりの資材": "18",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "7"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "1ボルトあたりの資材:14 一駅あたりの最大貯金:30 資材積載量:8",
+          "stats": {
+            "1ボルトあたりの資材": "14",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "8"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "1ボルトあたりの資材:10 一駅あたりの最大貯金:30 資材積載量:9",
+          "stats": {
+            "1ボルトあたりの資材": "10",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "9"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "1ボルトあたりの資材:9 一駅あたりの最大貯金:30 資材積載量:11",
+          "stats": {
+            "1ボルトあたりの資材": "9",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "11"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "1ボルトあたりの資材:9 一駅あたりの最大貯金:30 資材積載量:12",
+          "stats": {
+            "1ボルトあたりの資材": "9",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "12"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "1ボルトあたりの資材:8 一駅あたりの最大貯金:30 資材積載量:13",
+          "stats": {
+            "1ボルトあたりの資材": "8",
+            "一駅あたりの最大貯金": "30",
+            "資材積載量": "13"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "toaster",
+      "name_ja": "カートリッジトースター",
+      "category": "special",
+      "description": "動物を8体積み込むことでカートリッジをランダムで生成する ※カーゴ渓谷で入手可能",
+      "levelup_summary": "動物を積み込める上限が増える",
+      "game_description": "動物からランダムなカートリッジを生産するよ。",
+      "tips": [
+        "余った動物は保持して、毎マップで2体を入れられるようにしよう。",
+        "ボックスカー湿原やモノレール平原等は出現する動物が多いのでお勧め。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/84.html",
+      "icon": {
+        "1": "assets/wagons/1/toaster_s1.png",
+        "2": "assets/wagons/2/toaster_s2.png",
+        "3": "assets/wagons/3/toaster_s3.png",
+        "4": "assets/wagons/4/toaster_s4.png",
+        "5": "assets/wagons/5/toaster_s5.png",
+        "6": "assets/wagons/6/toaster_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:3",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:4",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "4"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:5",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "5"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:6",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "6"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:7",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "7"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:8",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "8"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:8",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "8"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:8",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "8"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "作成に必要な動物:8 一駅あたりの最大貯金:8",
+          "stats": {
+            "作成に必要な動物": "8",
+            "一駅あたりの最大貯金": "8"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "printer",
+      "name_ja": "ワゴンプリンター",
+      "category": "special",
+      "description": "レールを消費することでワゴンをランダムで生成する ※ボックスカー湿原で入手可能",
+      "levelup_summary": "ワゴン生成に必要な線路数が減る / 積載できるレールが増える",
+      "game_description": "線路からランダムなワゴンをプリントするよ。",
+      "tips": [
+        "ワゴンを生成するワゴン、出てくるワゴンはランダム(?駅のワゴンを除く)でLv.1かつ拡張パーツなしの状態でもらえる。拡張パーツの枠が1枠多いので、最大効率を目指すならプリンター産のワゴンに全部置き換える必要がある。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/85.html",
+      "icon": {
+        "1": "assets/wagons/1/printer_s1.png",
+        "2": "assets/wagons/2/printer_s2.png",
+        "3": "assets/wagons/3/printer_s3.png",
+        "4": "assets/wagons/4/printer_s4.png",
+        "5": "assets/wagons/5/printer_s5.png",
+        "6": "assets/wagons/6/printer_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "プリントに必要な線路:20 一駅あたりの最大貯金:10 資材積載量:3",
+          "stats": {
+            "プリントに必要な線路": "20",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "プリントに必要な線路:18 一駅あたりの最大貯金:10 資材積載量:4",
+          "stats": {
+            "プリントに必要な線路": "18",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "4"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "プリントに必要な線路:16 一駅あたりの最大貯金:10 資材積載量:5",
+          "stats": {
+            "プリントに必要な線路": "16",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "5"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "プリントに必要な線路:14 一駅あたりの最大貯金:10 資材積載量:7",
+          "stats": {
+            "プリントに必要な線路": "14",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "7"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "プリントに必要な線路:12 一駅あたりの最大貯金:10 資材積載量:8",
+          "stats": {
+            "プリントに必要な線路": "12",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "8"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "プリントに必要な線路:10 一駅あたりの最大貯金:10 資材積載量:9",
+          "stats": {
+            "プリントに必要な線路": "10",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "9"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "プリントに必要な線路:9 一駅あたりの最大貯金:10 資材積載量:10",
+          "stats": {
+            "プリントに必要な線路": "9",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "10"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "プリントに必要な線路:9 一駅あたりの最大貯金:10 資材積載量:11",
+          "stats": {
+            "プリントに必要な線路": "9",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "11"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "プリントに必要な線路:8 一駅あたりの最大貯金:10 資材積載量:11",
+          "stats": {
+            "プリントに必要な線路": "8",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "11"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "プリントに必要な線路:8 一駅あたりの最大貯金:10 資材積載量:12",
+          "stats": {
+            "プリントに必要な線路": "8",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "12"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "プリントに必要な線路:7 一駅あたりの最大貯金:10 資材積載量:12",
+          "stats": {
+            "プリントに必要な線路": "7",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "12"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "プリントに必要な線路:7 一駅あたりの最大貯金:10 資材積載量:13",
+          "stats": {
+            "プリントに必要な線路": "7",
+            "一駅あたりの最大貯金": "10",
+            "資材積載量": "13"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": true
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": true
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": true
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": true
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "hex",
+      "name_ja": "ヘックスカート",
+      "category": "special",
+      "description": "時間経過でヘックスナットを生成する ※アイランドICで入手可能",
+      "levelup_summary": "より短い時間でヘックスナットを生成する",
+      "game_description": "どこからともなく六角ナットを作るよ。設計図エリアでないことは確かだね。",
+      "tips": [],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/86.html",
+      "icon": {
+        "1": "assets/wagons/1/hex_s1.png",
+        "2": "assets/wagons/2/hex_s2.png",
+        "3": "assets/wagons/3/hex_s3.png",
+        "4": "assets/wagons/4/hex_s4.png",
+        "5": "assets/wagons/5/hex_s5.png",
+        "6": "assets/wagons/6/hex_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "クラフト速度:360.0秒",
+          "stats": {
+            "クラフト速度": "360.0秒"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "クラフト速度:300.0秒",
+          "stats": {
+            "クラフト速度": "300.0秒"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "クラフト速度:240.0秒",
+          "stats": {
+            "クラフト速度": "240.0秒"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "クラフト速度:180.0秒",
+          "stats": {
+            "クラフト速度": "180.0秒"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "クラフト速度:120.0秒",
+          "stats": {
+            "クラフト速度": "120.0秒"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "クラフト速度:60.0秒",
+          "stats": {
+            "クラフト速度": "60.0秒"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "クラフト速度:58.5秒",
+          "stats": {
+            "クラフト速度": "58.5秒"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "クラフト速度:57.0秒",
+          "stats": {
+            "クラフト速度": "57.0秒"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "クラフト速度:56.5秒",
+          "stats": {
+            "クラフト速度": "56.5秒"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": true
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "task",
+      "name_ja": "タスクワゴン",
+      "category": "special",
+      "description": "報酬としてレールがもらえるタスクを生成する。現在サンドボックス以外で使用不可",
+      "levelup_summary": "タスク報酬でもらえるレールの数が増える",
+      "game_description": "常に新しいタスクを与えてくれて、クリアしたらランダムアイテムがもらえるよ。",
+      "tips": [
+        "元々はボイラー荒地の特殊ワゴンだったが、手レポーターワゴンに変更になったため現在は通常入手不可。",
+        "一応サンドボックスにはまだいるはず。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/87.html",
+      "icon": {
+        "1": "assets/wagons/1/task_s1.png",
+        "2": "assets/wagons/2/task_s2.png",
+        "3": "assets/wagons/3/task_s3.png",
+        "4": "assets/wagons/4/task_s4.png",
+        "5": "assets/wagons/5/task_s5.png",
+        "6": "assets/wagons/6/task_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "生産品積載量:5",
+          "stats": {
+            "生産品積載量": "5"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "生産品積載量:6",
+          "stats": {
+            "生産品積載量": "6"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "生産品積載量:7",
+          "stats": {
+            "生産品積載量": "7"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "生産品積載量:8",
+          "stats": {
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "生産品積載量:9",
+          "stats": {
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "生産品積載量:10",
+          "stats": {
+            "生産品積載量": "10"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "生産品積載量:10",
+          "stats": {
+            "生産品積載量": "10"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "生産品積載量:11",
+          "stats": {
+            "生産品積載量": "11"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "生産品積載量:11",
+          "stats": {
+            "生産品積載量": "11"
+          }
+        }
+      ],
+      "expansion_parts": {
+        "storage-pull": {
+          "name_ja": "ストレージ引き出し",
+          "compatible": false
+        },
+        "storage-push": {
+          "name_ja": "ストレージ搬入",
+          "compatible": false
+        },
+        "front-pull": {
+          "name_ja": "前方引き出し",
+          "compatible": false
+        },
+        "auto-drop": {
+          "name_ja": "自動投下",
+          "compatible": false
+        },
+        "magnet-pick": {
+          "name_ja": "マグネット回収",
+          "compatible": false
+        },
+        "ghost": {
+          "name_ja": "ゴースト",
+          "compatible": true
+        },
+        "hydrocharge": {
+          "name_ja": "ハイドロチャージ",
+          "compatible": false
+        },
+        "supercharge": {
+          "name_ja": "スーパーチャージ",
+          "compatible": true
+        },
+        "range-extension": {
+          "name_ja": "範囲拡張",
+          "compatible": false
+        },
+        "speed-boost": {
+          "name_ja": "速度上昇",
+          "compatible": false
+        },
+        "stack-boost": {
+          "name_ja": "スタック上昇",
+          "compatible": false
+        },
+        "time-extension": {
+          "name_ja": "時間延長",
+          "compatible": false
+        },
+        "key": {
+          "name_ja": "鍵",
+          "compatible": true
+        }
+      },
+      "aura": null
+    },
+    {
+      "id": "teleporter",
+      "name_ja": "テレポーターワゴン",
+      "category": "special",
+      "description": "ポータルを設置して、移動できるようになる。ボイラーで取得可能。",
+      "levelup_summary": "ポータルを設置できる範囲が増える",
+      "game_description": "マップ上にテレポーターを設置できるよ。ワゴンとテレポーター間でプレイヤーをテレポートできるんだ。",
+      "tips": [
+        "テレポーターワゴンの上部は取り外しできる。",
+        "取り外したテレポーターの上部とワゴンを行き来できる。",
+        "レベルを上げると遠方までワープできるようになる"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/95.html",
+      "icon": {
+        "1": "assets/wagons/1/teleporter_s1.png",
+        "2": "assets/wagons/2/teleporter_s2.png",
+        "3": "assets/wagons/3/teleporter_s3.png",
+        "4": "assets/wagons/4/teleporter_s4.png",
+        "5": "assets/wagons/5/teleporter_s5.png",
+        "6": "assets/wagons/6/teleporter_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "範囲：10.0m",
+          "stats": {
+            "範囲": "10.0m"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "範囲：14.0m",
+          "stats": {
+            "範囲": "14.0m"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "範囲：18.0m",
+          "stats": {
+            "範囲": "18.0m"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "範囲：22.0m",
+          "stats": {
+            "範囲": "22.0m"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "範囲：26.0m",
+          "stats": {
+            "範囲": "26.0m"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "範囲：30.0m",
+          "stats": {
+            "範囲": "30.0m"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "範囲：31.0m",
+          "stats": {
+            "範囲": "31.0m"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "範囲：32.0m",
+          "stats": {
+            "範囲": "32.0m"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "範囲：33.0m",
+          "stats": {
+            "範囲": "33.0m"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "範囲：34.0m",
+          "stats": {
+            "範囲": "34.0m"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "範囲：35.0m",
+          "stats": {
+            "範囲": "35.0m"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "範囲：36.0m",
+          "stats": {
+            "範囲": "36.0m"
+          }
+        }
+      ],
+      "expansion_parts": null,
+      "aura": null
+    },
+    {
+      "id": "mimic",
+      "name_ja": "物まねワゴン",
+      "category": "special",
+      "description": "前のワゴンを物まねして同じワゴンになる。ラビリンスで取得可能。",
+      "levelup_summary": "同じワゴンを探す必要がなく、駅ごとに変更することで汎用性がある",
+      "game_description": "列車に連結すると、前方のワゴンの外観と能力をコピーするよ。",
+      "tips": [
+        "前方ワゴンの模倣になるため、そのワゴンによる。",
+        "2列並ぶことで効果が実感しやすいワゴンが相性が良い。",
+        "物まねワゴンを置いたタイミングで物まねするワゴンが決まります。 そのため、まねた後に移動させることが可能。汎用性が高いので、うまく動かしてあげましょう。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/96.html",
+      "icon": {
+        "1": "assets/wagons/1/mimic_s1.png",
+        "2": "assets/wagons/2/mimic_s2.png",
+        "3": "assets/wagons/3/mimic_s3.png",
+        "4": "assets/wagons/4/mimic_s4.png",
+        "5": "assets/wagons/5/mimic_s5.png",
+        "6": "assets/wagons/6/mimic_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 2,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 3,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 4,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 5,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 6,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 7,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 8,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 9,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 10,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 11,
+          "effect": "なし",
+          "stats": {}
+        },
+        {
+          "level": 12,
+          "effect": "なし",
+          "stats": {}
+        }
+      ],
+      "expansion_parts": null,
+      "aura": null
+    },
+    {
+      "id": "bridge",
+      "name_ja": "ブリッジワゴン",
+      "category": "normal",
+      "description": "木材を利用して、橋を引くドローンを作成することが出来る。",
+      "levelup_summary": "ブリッジをつくるワゴン",
+      "game_description": "水の上を飛行すると進路に沿って橋を架ける、直進する飛行装置を木材から作るよ。",
+      "tips": [
+        "ボイラーとアイランドのマップで強力なワゴン。モブであれば倒すことが可能。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/97.html",
+      "icon": {
+        "1": "assets/wagons/1/bridge_s1.png",
+        "2": "assets/wagons/2/bridge_s2.png",
+        "3": "assets/wagons/3/bridge_s3.png",
+        "4": "assets/wagons/4/bridge_s4.png",
+        "5": "assets/wagons/5/bridge_s5.png",
+        "6": "assets/wagons/6/bridge_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "クラフト速度：30.0 橋の数：6",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "6"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "クラフト速度：30.0 橋の数：9",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "9"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "クラフト速度：30.0 橋の数：12",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "12"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "クラフト速度：30.0 橋の数：15",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "15"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "クラフト速度：30.0 橋の数：18",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "18"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "クラフト速度：30.0 橋の数：21",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "21"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "クラフト速度：30.0 橋の数：21",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "21"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "クラフト速度：30.0 橋の数：22",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "22"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "クラフト速度：30.0 橋の数：23",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "23"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "クラフト速度：30.0 橋の数：24",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "24"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "クラフト速度：30.0 橋の数：25",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "25"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "クラフト速度：30.0 橋の数：26",
+          "stats": {
+            "クラフト速度": "30.0",
+            "橋の数": "26"
+          }
+        }
+      ],
+      "expansion_parts": null,
+      "aura": null
+    },
+    {
+      "id": "braketrack",
+      "name_ja": "ブレーキレールワゴン",
+      "category": "normal",
+      "description": "ブレーキレールを作成し、電車の速度を遅くすることが出来る。停止はできない。",
+      "levelup_summary": "ブレーキレールで速度を緩めることが出来る",
+      "game_description": "普通のレールからブレーキレールをクラフトできるよ",
+      "tips": [
+        "前方引き寄せ等でクラフトワゴンからレールを自動で引き寄せられるようにすることで作業を減らすことが出来ます。",
+        "作ったブレーキレールをためて、高速帯を超えよう。",
+        "作成時間が長いので、時間がかかります。完全に自動化することで、余裕を持った動きができるようになる。"
+      ],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/98.html",
+      "icon": {
+        "1": "assets/wagons/1/braketrack_s1.png",
+        "2": "assets/wagons/2/braketrack_s2.png",
+        "3": "assets/wagons/3/braketrack_s3.png",
+        "4": "assets/wagons/4/braketrack_s4.png",
+        "5": "assets/wagons/5/braketrack_s5.png",
+        "6": "assets/wagons/6/braketrack_s6.png"
+      },
+      "levels": [
+        {
+          "level": 1,
+          "effect": "資材積載量：3 クラフト速度：30.0 生産品積載量：3",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "30.0",
+            "生産品積載量": "3"
+          }
+        },
+        {
+          "level": 2,
+          "effect": "資材積載量：3 クラフト速度：26.4 生産品積載量：4",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "26.4",
+            "生産品積載量": "4"
+          }
+        },
+        {
+          "level": 3,
+          "effect": "資材積載量：3 クラフト速度：22.8 生産品積載量：5",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "22.8",
+            "生産品積載量": "5"
+          }
+        },
+        {
+          "level": 4,
+          "effect": "資材積載量：3 クラフト速度：19.2 生産品積載量：6",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "19.2",
+            "生産品積載量": "6"
+          }
+        },
+        {
+          "level": 5,
+          "effect": "資材積載量：3 クラフト速度：15.6 生産品積載量：7",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "15.6",
+            "生産品積載量": "7"
+          }
+        },
+        {
+          "level": 6,
+          "effect": "資材積載量：3 クラフト速度：12.0 生産品積載量：8",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "12.0",
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 7,
+          "effect": "資材積載量：3 クラフト速度：11.4 生産品積載量：8",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "11.4",
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 8,
+          "effect": "資材積載量：3 クラフト速度：10.8 生産品積載量：8",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "10.8",
+            "生産品積載量": "8"
+          }
+        },
+        {
+          "level": 9,
+          "effect": "資材積載量：3 クラフト速度：10.2 生産品積載量：9",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "10.2",
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 10,
+          "effect": "資材積載量：3 クラフト速度：9.6 生産品積載量：9",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "9.6",
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 11,
+          "effect": "資材積載量：3 クラフト速度：9.0 生産品積載量：9",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "9.0",
+            "生産品積載量": "9"
+          }
+        },
+        {
+          "level": 12,
+          "effect": "資材積載量：3 クラフト速度：8.4 生産品積載量：10",
+          "stats": {
+            "資材積載量": "3",
+            "クラフト速度": "8.4",
+            "生産品積載量": "10"
+          }
+        }
+      ],
+      "expansion_parts": null,
+      "aura": null
+    },
+    {
+      "id": "versus",
+      "name_ja": "対戦用製造カート",
+      "category": "versus",
+      "description": "鉄を搬入すると爆弾を、木材を搬入するとドローンを生成する(対戦モード初期装備)",
+      "levelup_summary": "爆弾は爆発範囲が広がる / ドローンは移動速度が速まる",
+      "game_description": "",
+      "tips": [],
+      "wiki_url": "https://w.atwiki.jp/unrailed2/pages/40.html",
+      "icon": {
+        "1": "assets/wagons/1/versus_s1.png",
+        "2": "assets/wagons/2/versus_s2.png",
+        "3": "assets/wagons/3/versus_s3.png",
+        "4": "assets/wagons/4/versus_s4.png",
+        "5": "assets/wagons/5/versus_s5.png",
+        "6": "assets/wagons/6/versus_s6.png"
+      },
+      "levels": [],
+      "expansion_parts": null,
+      "aura": null
+    }
+  ]
+}

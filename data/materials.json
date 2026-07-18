@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "notes": [
+      "consumes は「効果の発揮に資材を消費するワゴン」の一覧。wagons.json の説明文に基づく",
+      "wood+iron の両方を消費する場合は表示上 mixed アイコン(Commodities)にまとめる",
+      "magnet は特例: 木材・鉄に加えてレールも扱える",
+      "このファイルを編集すれば表示される消費資材を自由に調整できる"
+    ]
+  },
+  "icons": {
+    "wood":   "assets/materials/Wood.png",
+    "iron":   "assets/materials/Iron.png",
+    "rail":   "assets/materials/Track.png",
+    "mixed":  "assets/materials/Commodities.png",
+    "animal": "assets/materials/Deer.png"
+  },
+  "labels": {
+    "wood": "木材",
+    "iron": "鉄",
+    "rail": "レール",
+    "mixed": "木材+鉄",
+    "animal": "動物"
+  },
+  "consumes": {
+    "collector":    ["wood"],
+    "crafter":      ["wood", "iron"],
+    "transformer":  ["wood", "iron"],
+    "dynamite":     ["iron"],
+    "miner":        ["iron"],
+    "torpedo":      ["iron"],
+    "supercharger": ["iron"],
+    "compactor":    ["wood", "iron"],
+    "piggy":        ["wood", "iron"],
+    "printer":      ["rail"],
+    "toaster":      ["animal"],
+    "bridge":       ["wood"],
+    "versus":       ["wood", "iron"],
+    "magnet":       ["wood", "iron", "rail"]
+  }
+}
