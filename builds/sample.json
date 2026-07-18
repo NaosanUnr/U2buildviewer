@@ -2,16 +2,82 @@
   "v": 2,
   "name": "サンプル：クラフト循環ビルド",
   "concept": "貨物ワゴンを軸に、変換→貨物→クラフトの資材循環をつくる基本形。\n資材のワゴン間移動は拡張パーツ(storage-pull / storage-push / front-pull)で発生する。\nスーパーチャージで中核ワゴンを強化し、ゴーストワゴンで事故率を下げる。",
-  "tags": ["エンドレス", "サンプル"],
+  "tags": [
+    "エンドレス",
+    "サンプル"
+  ],
   "engine": "steam",
   "enginePos": 7,
   "wagons": [
-    { "id": "collector", "level": 4, "memo": "拾った資材はストレージ搬入で最寄りの貨物へ自動転送。", "ext": ["storage-push", null, null] },
-    { "id": "transformer", "level": 3, "memo": "変換した資材もストレージ搬入で貨物へ。", "ext": ["storage-push", null, null] },
-    { "id": "storage", "level": 5, "memo": "後方側の中継庫。", "ext": [null, null, null] },
-    { "id": "ghost", "level": 3, "memo": "", "ext": [null, null, null] },
-    { "id": "crafter", "level": 5, "memo": "初期装備のストレージ引き出しで最寄りの貨物から材料を自動吸い上げ。", "ext": ["storage-pull", null, null] },
-    { "id": "supercharger", "level": 3, "memo": "", "ext": ["time-extension", null, null] },
-    { "id": "storage", "level": 4, "memo": "レール即納用に先頭近くへ。", "ext": [null, null, null] }
+    {
+      "id": "collector",
+      "level": 4,
+      "memo": "拾った資材はストレージ搬入で最寄りの貨物へ自動転送。",
+      "ext": [
+        "storage-push",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "transformer",
+      "level": 3,
+      "memo": "変換した資材もストレージ搬入で貨物へ。",
+      "ext": [
+        "storage-push",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "storage",
+      "level": 5,
+      "memo": "後方側の中継庫。",
+      "ext": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "ghost",
+      "level": 3,
+      "memo": "",
+      "ext": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "crafter",
+      "level": 5,
+      "memo": "初期装備のストレージ引き出しで最寄りの貨物から材料を自動吸い上げ。",
+      "ext": [
+        "storage-pull",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "supercharger",
+      "level": 3,
+      "memo": "",
+      "ext": [
+        "time-extension",
+        null,
+        null
+      ]
+    },
+    {
+      "id": "storage",
+      "level": 4,
+      "memo": "レール即納用に先頭近くへ。",
+      "ext": [
+        null,
+        null,
+        null
+      ]
+    }
   ]
 }

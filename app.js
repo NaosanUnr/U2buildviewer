@@ -993,6 +993,12 @@ function renderSlotsPanel(){
     <div class="newrow">
       <input type="text" id="slotName" placeholder="スロット名" value="${esc(state.name || '')}">
       <button class="btn small primary" id="slotSave">現在のビルドを保存</button>
+    </div>
+    <div style="margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px">
+      <div class="hint" style="margin-bottom:6px">📌 <b>更新できる固定URLで配布</b>: 書き出したJSONをリポジトリの
+        <b>builds/</b> に置くと <b>?build=ファイル名.json</b> で共有できます。
+        ファイルを上書きすれば、閲覧者は再読み込みだけで最新ビルドが見られます。</div>
+      <button class="btn small" id="slotExport">⤓ 現在のビルドをJSONで書き出し</button>
     </div>`;
   p.querySelectorAll('.slot-row button').forEach(b => b.onclick = () => {
     const n = b.closest('.slot-row').dataset.n;
@@ -1012,6 +1018,16 @@ function renderSlotsPanel(){
     localStorage.setItem(LS_SLOTS, JSON.stringify(slots));
     renderSlotsPanel();
     toast(`「${n}」に保存しました`);
+  };
+  // builds/ ディレクトリ配布用のJSON書き出し(固定URLで最新版を配信できる)
+  $('#slotExport').onclick = () => {
+    // ファイル名はビルド名から生成(ファイル名/URLに使えない文字は _ に置換)
+    const fname = ((state.name || 'build').replace(/[\\/:*?"<>|#&\s]+/g, '_') || 'build') + '.json';
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type:'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = fname; a.click();
+    URL.revokeObjectURL(a.href);
+    toast(`${fname} を書き出しました。builds/ に置いて ?build=${fname} で共有できます`);
   };
 }
 
@@ -1122,8 +1138,10 @@ async function main(){
   if (b) {
     try { loaded = await decodeBuild(b); }
     catch (e) { console.error(e); toast('URLのビルドデータを読み込めませんでした'); }
-  } else if (buildFile && /^[\w.-]+\.json$/.test(buildFile)) {
-    try { loaded = await (await fetch('builds/' + buildFile)).json(); }
+  } else if (buildFile && /^[^\\/]+\.json$/.test(buildFile) && !buildFile.includes('..')) {
+    // 日本語ファイル名も許可(パス区切りと .. のみ禁止)。
+    // no-cache で毎回サーバーに確認し、builds/ の更新が再読み込みで反映されるようにする
+    try { loaded = await (await fetch('builds/' + encodeURIComponent(buildFile), { cache:'no-cache' })).json(); }
     catch (e) { console.error(e); toast(`builds/${buildFile} を読み込めませんでした`); }
   }
 
