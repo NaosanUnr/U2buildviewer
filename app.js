@@ -63,6 +63,7 @@ let liveId = null;            // 同期しているビルドID
 let liveUnsub = null;         // 購読解除用
 let liveAutoPublish = false;  // 編集のたびに自動で公開するか
 let liveLastUpdated = null;   // 最終更新時刻(サーバー時刻)
+let liveChecked = false;      // live.js の準備が済んだ(または諦めた)か
 
 // UI 一時状態
 let currentCat = 'normal';
@@ -1118,7 +1119,7 @@ function scheduleLivePublish(){
 function openLoginDialog(){
   dlgBox.innerHTML = `
     <h4>🔑 ホストとしてログイン</h4>
-    <div class="hint" style="margin-bottom:8px">ライブ公開するにはログインが必要です。<br>
+    <div class="hint" style="margin-bottom:8px">共有URL・保存スロット・ライブ公開などのホスト用機能を使うにはログインが必要です。<br>
       ビルドを見るだけの人はログイン不要です。</div>
     <input type="email" id="liveEmail" placeholder="メールアドレス" autocomplete="username">
     <input type="password" id="livePass" placeholder="パスワード" autocomplete="current-password">
@@ -1147,22 +1148,32 @@ function openLoginDialog(){
   $('#liveEmail').focus();
 }
 
+/* ホスト用の機能(共有URL・保存スロット・編集者として記憶・ライブ公開)を出してよいか。
+ * ログイン中のホストだけに見せる。Firebase未設定の環境(フォーク等)ではログインが無いので従来どおり出す。 */
+function canUseHostTools(){
+  if (!liveChecked) return false;               // 判定中は隠す(閲覧者に一瞬見えるのを防ぐ)
+  if (!LIVE || !LIVE.configured) return true;
+  return !!LIVE.user();
+}
+
 /* ヘッダーのライブ関連UI */
 function renderLiveUI(){
   const on = !!(liveId && LIVE && LIVE.configured);
+  const authOn = !!(LIVE && LIVE.configured);
   const editing = isEditing();
-  const signedIn = on && !!LIVE.user();
+  const signedIn = authOn && !!LIVE.user();
   const badge = $('#liveBadge');
   badge.hidden = !on;
-  $('#livePublishBtn').hidden = !(on && editing);
-  $('#liveAutoBtn').hidden    = !(on && editing);
-  $('#liveAccountBtn').hidden = !(on && editing);
+  // 公開系はログイン中のホストだけ。ログインボタンは編集モードならいつでも出す
+  $('#livePublishBtn').hidden = !(on && editing && signedIn);
+  $('#liveAutoBtn').hidden    = !(on && editing && signedIn);
+  $('#liveAccountBtn').hidden = !(authOn && editing);
+  $('#liveAccountBtn').textContent = signedIn ? '👤 ログアウト' : '🔑 ログイン';
   if (!on) return;
   badge.textContent = editing ? `📡 LIVE : ${liveId}` : '🟢 LIVE同期中';
   badge.title = liveLastUpdated
     ? '最終更新: ' + new Date(liveLastUpdated).toLocaleString('ja-JP') : 'ホストの更新を待機中';
   $('#liveAutoBtn').classList.toggle('on', liveAutoPublish);
-  $('#liveAccountBtn').textContent = signedIn ? '👤 ログアウト' : '🔑 ログイン';
 }
 
 /* ===== ヘッダーのボタン類 ===== */
@@ -1172,14 +1183,17 @@ function renderHeader(){
   badge.className = 'mode-badge ' + (editing ? 'edit' : 'preview');
   badge.textContent = editing ? 'EDIT' : 'PREVIEW';
   document.body.classList.toggle('editing', editing);
-  $('#shareBtn').hidden = !editing;
-  $('#slotsBtn').hidden = !editing;
-  $('#rememberBtn').hidden = !editing;
-  $('#previewToggleBtn').hidden = !editMode;
-  $('#previewToggleBtn').textContent = forcePreview ? '✏ 編集に戻る' : '👁 プレビュー確認';
+  const host = editing && canUseHostTools();
+  $('#shareBtn').hidden = !host;
+  $('#slotsBtn').hidden = !host;
+  $('#rememberBtn').hidden = !host;
+  // 「編集に戻る」は下の大きいボタンが兼ねるので、右上はプレビュー確認の時だけ
+  $('#previewToggleBtn').hidden = !(editMode && !forcePreview);
   $('#copyEditWrap').hidden = editing;
+  $('#copyEditBtn').textContent = forcePreview ? '✏ 編集に戻る' : '✏ このビルドをコピーして自分用に編集する';
+  $('#copyEditHint').hidden = forcePreview;
   $('#rememberBtn').classList.toggle('on', localStorage.getItem(LS_EDITOR) === '1');
-  if (!editing) $('#slotsPanel').classList.remove('show');
+  if (!host) $('#slotsPanel').classList.remove('show');
   renderLiveUI();
 }
 
@@ -1211,11 +1225,14 @@ function bindHeaderButtons(){
     forcePreview = !forcePreview;
     renderAll();
   };
-  $('#copyEditLink').onclick = async ev => {
-    ev.preventDefault();
+  $('#copyEditBtn').onclick = async () => {
+    // ホストが「プレビュー確認」中なら、そのまま編集に戻るだけ
+    if (forcePreview) { forcePreview = false; renderAll(); return; }
+    // 閲覧者: ?live= や ?build= を外し、完全に自分用のコピーとして開き直す
     const enc = await encodeBuild();
-    location.hash = 'b=' + enc + '&edit=1';
-    location.reload();
+    const url = location.pathname + '#b=' + enc + '&edit=1';
+    if (location.search) location.href = url;       // クエリが変わるので自動で読み込み直される
+    else { location.hash = 'b=' + enc + '&edit=1'; location.reload(); }
   };
   /* --- 画像出力(export-png.js) --- */
   $('#pngBtn').onclick = () => { if (window.openPngDialog) window.openPngDialog(); };
@@ -1285,11 +1302,13 @@ async function main(){
   // ライブ同期(?live=<id>)。live.js の準備を最大5秒待つ。
   // 読み込めなかった場合や未設定の場合は、従来機能だけで通常どおり動作する。
   const liveParam = searchParams.get('live');
+  const liveReady = Promise.race([
+    window.U2LiveReady || Promise.resolve(null),
+    new Promise(r => setTimeout(() => r(null), 5000)),
+  ]);
   if (liveParam) {
-    LIVE = await Promise.race([
-      window.U2LiveReady || Promise.resolve(null),
-      new Promise(r => setTimeout(() => r(null), 5000)),
-    ]);
+    LIVE = await liveReady;
+    liveChecked = true;
     if (LIVE && LIVE.configured) liveId = liveParam;
     else toast('ライブ同期が未設定のため、通常表示で開きました');
   }
@@ -1339,6 +1358,14 @@ async function main(){
     LIVE.onAuthChange(() => renderHeader());
     // 閲覧者だけ購読する(ホストは自分の編集を上書きされないよう購読しない)
     if (!editMode) startLiveSubscribe();
+  } else {
+    // ライブ以外の画面でも、ログイン状態でホスト用ボタンを出し分ける(画面の表示は待たせない)
+    liveReady.then(api => {
+      if (liveChecked) return;
+      LIVE = api; liveChecked = true;
+      if (api && api.configured) api.onAuthChange(() => renderHeader());
+      else renderHeader();
+    });
   }
 }
 
