@@ -27,6 +27,11 @@ header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 20px
 .mode-badge{font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:.5px}
 .mode-badge.edit{background:rgba(255,206,74,.15);color:var(--gold);border:1px solid rgba(255,206,74,.5)}
 .mode-badge.preview{background:rgba(90,169,255,.12);color:var(--blue);border:1px solid rgba(90,169,255,.45)}
+/* ライブ同期の状態表示 */
+.live-badge{font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;letter-spacing:.5px;
+  background:rgba(95,208,122,.14);color:var(--green);border:1px solid rgba(95,208,122,.5);
+  animation:livepulse 2.4s ease-in-out infinite}
+@keyframes livepulse{0%,100%{opacity:1}50%{opacity:.55}}
 
 .btn{font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;border:none;border-radius:11px;
   padding:8px 13px;color:var(--cream);background:#313b4f;border-bottom:3px solid #222a3a;transition:.12s;}
@@ -217,7 +222,8 @@ body.editing .ext-slot:hover{border-color:var(--teal)}
 .ext-pick .cmp.ng{color:#ff8a8a}
 .ext-pick .cmp.unknown{color:var(--muted)}
 .ext-pick.none{justify-content:center;color:var(--muted)}
-.dlg input[type=text],.dlg textarea{width:100%;font-family:inherit;background:var(--slot);border:2px solid var(--slot-edge);
+.dlg input[type=text],.dlg input[type=email],.dlg input[type=password],.dlg textarea{width:100%;font-family:inherit;
+  background:var(--slot);border:2px solid var(--slot-edge);
   border-radius:10px;color:var(--cream);padding:7px 10px;font-size:13px;margin-bottom:10px}
 .dlg textarea{resize:vertical;min-height:80px}
 .dlg input:focus,.dlg textarea:focus{outline:none;border-color:var(--gold)}
@@ -248,3 +254,13 @@ body.editing .ext-slot:hover{border-color:var(--teal)}
   .meta-bar{padding:8px 12px}
   .legend{padding:4px 12px 8px}
 }
+
+/* ===== 画像出力ダイアログ ===== */
+.dlg.wide{width:min(820px,94vw)}
+.png-preview{max-height:56vh;overflow:auto;background:#10141c;border:1px solid var(--slot-edge);
+  border-radius:10px;margin-bottom:12px;min-height:120px}
+.png-preview canvas{display:block;width:100%;height:auto}
+.chk{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;cursor:pointer;margin:6px 0}
+.chk input{width:16px;height:16px;accent-color:var(--gold);cursor:pointer}
+.chk-sub{margin:0 0 6px 24px;transition:opacity .15s}
+.chk-sub.off{opacity:.35;pointer-events:none}

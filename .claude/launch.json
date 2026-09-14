@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "u2viewer",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["local-server.js"],
+      "port": 8642
+    }
+  ]
+}

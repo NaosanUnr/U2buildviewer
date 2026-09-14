@@ -57,6 +57,13 @@ let editMode = true;       // 実効の編集モード
 let forcePreview = false;  // 編集者向け「プレビュー確認」トグル
 let autosaveEnabled = false;
 
+// ライブ同期 (?live=<id>)
+let LIVE = null;              // live.js が公開する API (未設定なら null)
+let liveId = null;            // 同期しているビルドID
+let liveUnsub = null;         // 購読解除用
+let liveAutoPublish = false;  // 編集のたびに自動で公開するか
+let liveLastUpdated = null;   // 最終更新時刻(サーバー時刻)
+
 // UI 一時状態
 let currentCat = 'normal';
 let dragIdx = null;        // DnD 中のワゴン index
@@ -790,7 +797,7 @@ function wagonTipHTML(i){
   const plus = fx.plus[i];
   let auraHtml = '';
   if (def.aura) {
-    const lvForRange = Math.min(w.level + plus.pusher, maxLevel(def));
+    const lvForRange = Math.min(w.level + plus.pusher + plus.parts, maxLevel(def));
     const ent = levelEntry(def, lvForRange);
     const r = parseInt(ent && ent.stats && ent.stats[def.aura.stat_key], 10) || 0;
     auraHtml += `<div class="aura-info"><span class="sw" style="background:${AURA_STYLE[def.aura.type].color}"></span>
@@ -899,7 +906,7 @@ function renderPalette(){
 /* ===== ダイアログ ===== */
 const dlgOverlay = $('#dlgOverlay');
 const dlgBox = $('#dlgBox');
-function closeDialog(){ dlgOverlay.classList.remove('show'); dlgBox.innerHTML = ''; }
+function closeDialog(){ dlgOverlay.classList.remove('show'); dlgBox.innerHTML = ''; dlgBox.className = 'dlg'; }
 dlgOverlay.addEventListener('click', ev => { if (ev.target === dlgOverlay) closeDialog(); });
 
 function openMemoDialog(i){
@@ -1064,6 +1071,98 @@ function autosave(){
   if (autosaveEnabled) {
     try { localStorage.setItem(LS_AUTOSAVE, JSON.stringify(state)); } catch {}
   }
+  scheduleLivePublish(); // 自動公開ONなら、少し待ってからライブにも反映
+}
+
+/* ===== ライブ同期 (?live=<id>) ===== */
+
+/* 閲覧者側: ホストの変更を購読して画面を自動更新する */
+function startLiveSubscribe(){
+  if (!LIVE || !LIVE.configured || !liveId || liveUnsub) return;
+  let first = true;
+  liveUnsub = LIVE.subscribe(liveId, rec => {
+    if (first) { first = false; return; } // 初回分は起動時に取得済みなので捨てる
+    if (!rec || !rec.state) return;
+    state = normalizeBuild(rec.state);
+    liveLastUpdated = rec.updatedAt || Date.now();
+    renderAll();
+    toast('🔄 ホストがビルドを更新しました');
+  });
+}
+
+/* ホスト側: 現在のビルドを公開(上書き) */
+let livePublishTimer = null;
+async function livePublish(silent){
+  if (!LIVE || !LIVE.configured || !liveId) return;
+  if (!LIVE.user()) { openLoginDialog(); return; }
+  try {
+    await LIVE.publish(liveId, state);
+    liveLastUpdated = Date.now();
+    if (!silent) toast('📡 ライブに公開しました(閲覧者の画面がすぐ更新されます)');
+    renderHeader();
+  } catch (e) {
+    console.error(e);
+    toast(e && e.code === 'PERMISSION_DENIED'
+      ? '公開権限がありません(ホストのアカウントでログインしてください)'
+      : '公開に失敗しました: ' + (e && (e.code || e.message)));
+  }
+}
+/* 自動公開: 編集が落ち着いてからまとめて送る(打つたびに送らない) */
+function scheduleLivePublish(){
+  if (!liveAutoPublish || !liveId || !LIVE || !LIVE.user()) return;
+  clearTimeout(livePublishTimer);
+  livePublishTimer = setTimeout(() => livePublish(true), 1200);
+}
+
+/* ホストのログイン(閲覧者には不要) */
+function openLoginDialog(){
+  dlgBox.innerHTML = `
+    <h4>🔑 ホストとしてログイン</h4>
+    <div class="hint" style="margin-bottom:8px">ライブ公開するにはログインが必要です。<br>
+      ビルドを見るだけの人はログイン不要です。</div>
+    <input type="email" id="liveEmail" placeholder="メールアドレス" autocomplete="username">
+    <input type="password" id="livePass" placeholder="パスワード" autocomplete="current-password">
+    <div class="dlg-btns">
+      <button class="btn subtle" id="dlgCancel">キャンセル</button>
+      <button class="btn primary" id="dlgOk">ログイン</button>
+    </div>`;
+  $('#dlgCancel').onclick = closeDialog;
+  $('#dlgOk').onclick = async () => {
+    const email = $('#liveEmail').value.trim();
+    const pw = $('#livePass').value;
+    if (!email || !pw) { toast('メールアドレスとパスワードを入力してください'); return; }
+    $('#dlgOk').disabled = true;
+    try {
+      await LIVE.signIn(email, pw);
+      closeDialog();
+      toast('ログインしました');
+      renderHeader();
+    } catch (e) {
+      console.error(e);
+      $('#dlgOk').disabled = false;
+      toast('ログインできませんでした(メールアドレスかパスワードをご確認ください)');
+    }
+  };
+  dlgOverlay.classList.add('show');
+  $('#liveEmail').focus();
+}
+
+/* ヘッダーのライブ関連UI */
+function renderLiveUI(){
+  const on = !!(liveId && LIVE && LIVE.configured);
+  const editing = isEditing();
+  const signedIn = on && !!LIVE.user();
+  const badge = $('#liveBadge');
+  badge.hidden = !on;
+  $('#livePublishBtn').hidden = !(on && editing);
+  $('#liveAutoBtn').hidden    = !(on && editing);
+  $('#liveAccountBtn').hidden = !(on && editing);
+  if (!on) return;
+  badge.textContent = editing ? `📡 LIVE : ${liveId}` : '🟢 LIVE同期中';
+  badge.title = liveLastUpdated
+    ? '最終更新: ' + new Date(liveLastUpdated).toLocaleString('ja-JP') : 'ホストの更新を待機中';
+  $('#liveAutoBtn').classList.toggle('on', liveAutoPublish);
+  $('#liveAccountBtn').textContent = signedIn ? '👤 ログアウト' : '🔑 ログイン';
 }
 
 /* ===== ヘッダーのボタン類 ===== */
@@ -1081,6 +1180,7 @@ function renderHeader(){
   $('#copyEditWrap').hidden = editing;
   $('#rememberBtn').classList.toggle('on', localStorage.getItem(LS_EDITOR) === '1');
   if (!editing) $('#slotsPanel').classList.remove('show');
+  renderLiveUI();
 }
 
 function bindHeaderButtons(){
@@ -1116,6 +1216,26 @@ function bindHeaderButtons(){
     const enc = await encodeBuild();
     location.hash = 'b=' + enc + '&edit=1';
     location.reload();
+  };
+  /* --- 画像出力(export-png.js) --- */
+  $('#pngBtn').onclick = () => { if (window.openPngDialog) window.openPngDialog(); };
+  /* --- ライブ同期 --- */
+  $('#livePublishBtn').onclick = () => livePublish(false);
+  $('#liveAutoBtn').onclick = () => {
+    liveAutoPublish = !liveAutoPublish;
+    toast(liveAutoPublish ? '自動公開ON(編集するたびに自動で反映します)' : '自動公開OFF');
+    if (liveAutoPublish) livePublish(true);
+    renderHeader();
+  };
+  $('#liveAccountBtn').onclick = async () => {
+    if (LIVE && LIVE.user()) {
+      await LIVE.signOut();
+      liveAutoPublish = false;
+      toast('ログアウトしました');
+      renderHeader();
+    } else {
+      openLoginDialog();
+    }
   };
 }
 
@@ -1162,8 +1282,30 @@ async function main(){
   const editFlag = hashParams.get('edit') === '1' || searchParams.get('edit') === '1';
   const lsFlag = localStorage.getItem(LS_EDITOR) === '1';
 
+  // ライブ同期(?live=<id>)。live.js の準備を最大5秒待つ。
+  // 読み込めなかった場合や未設定の場合は、従来機能だけで通常どおり動作する。
+  const liveParam = searchParams.get('live');
+  if (liveParam) {
+    LIVE = await Promise.race([
+      window.U2LiveReady || Promise.resolve(null),
+      new Promise(r => setTimeout(() => r(null), 5000)),
+    ]);
+    if (LIVE && LIVE.configured) liveId = liveParam;
+    else toast('ライブ同期が未設定のため、通常表示で開きました');
+  }
+
   let loaded = null;
-  if (b) {
+  if (liveId) {
+    try {
+      const rec = await LIVE.fetchOnce(liveId);
+      if (rec && rec.state) { loaded = rec.state; liveLastUpdated = rec.updatedAt || null; }
+    } catch (e) { console.error(e); toast('ライブビルドを取得できませんでした'); }
+  }
+  // ライブがまだ空なら、#b=... や ?build=... の中身から始められるようにする
+  // (例: ?live=main&edit=1&build=xxx.json → 既存ビルドを読み込んでから公開)
+  if (loaded) {
+    // ライブの内容を採用
+  } else if (b) {
     try { loaded = await decodeBuild(b); }
     catch (e) { console.error(e); toast('URLのビルドデータを読み込めませんでした'); }
   } else if (buildFile && /^[^\\/]+\.json$/.test(buildFile) && !buildFile.includes('..')) {
@@ -1173,7 +1315,8 @@ async function main(){
     catch (e) { console.error(e); toast(`builds/${buildFile} を読み込めませんでした`); }
   }
 
-  const hasUrlBuild = loaded !== null;
+  // ライブIDが指定されていれば、中身が空(新規)でも「URL指定のビルド」扱いにする
+  const hasUrlBuild = loaded !== null || !!liveId;
   editMode = !hasUrlBuild || editFlag || lsFlag;
   autosaveEnabled = editMode && !hasUrlBuild;
 
@@ -1190,6 +1333,13 @@ async function main(){
   bindHeaderButtons();
   renderAll();
   window.addEventListener('resize', drawArrows);
+
+  if (liveId) {
+    // ログイン状態が変わったらヘッダーを描き直す
+    LIVE.onAuthChange(() => renderHeader());
+    // 閲覧者だけ購読する(ホストは自分の編集を上書きされないよう購読しない)
+    if (!editMode) startLiveSubscribe();
+  }
 }
 
 main().catch(e => {

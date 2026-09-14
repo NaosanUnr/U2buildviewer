@@ -17,7 +17,15 @@
     <div class="s">列車ビルドの可視化・共有ツール ／ 右が先頭（front）</div>
   </div>
   <span id="modeBadge" class="mode-badge preview">PREVIEW</span>
+  <!-- ライブ同期の状態表示(?live=... で開いた時だけ) -->
+  <span id="liveBadge" class="live-badge" hidden></span>
   <div class="spacer"></div>
+  <!-- ライブ同期(ホスト用) -->
+  <button class="btn primary" id="livePublishBtn" hidden>📡 ライブに公開</button>
+  <button class="btn ghost" id="liveAutoBtn" hidden>自動公開</button>
+  <button class="btn subtle" id="liveAccountBtn" hidden>🔑 ログイン</button>
+  <!-- 画像出力(閲覧者も使える) -->
+  <button class="btn" id="pngBtn">🖼 画像で保存</button>
   <!-- 編集モード用ボタン -->
   <button class="btn primary" id="shareBtn" hidden>🔗 共有URLをコピー</button>
   <button class="btn" id="slotsBtn" hidden>💾 保存スロット</button>
@@ -70,6 +78,11 @@
 
 <div id="toast"></div>
 
+<!-- ライブ同期の準備(Firebase未設定なら自動的にスキップされ、従来どおり動作します) -->
+<script>window.U2LiveReady = new Promise(r => { window.__u2LiveResolve = r; });</script>
+<script src="firebase-config.js"></script>
+<script type="module" src="live.js"></script>
 <script src="app.js"></script>
+<script src="export-png.js"></script>
 </body>
 </html>
