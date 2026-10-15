@@ -38,6 +38,15 @@ const FLOW_PARTS = {
 };
 const STORAGE_ID = 'storage'; // 貨物ワゴンの id
 
+/* エンジンによるワゴンのレベル補正
+ * scope 'adjacent' … 隣接する前後1台のみ(推進式エンジン)
+ * scope 'all'      … 編成の全ワゴン + 保管庫(トウコモティブ) */
+const ENGINE_BUFF = {
+  pusher: { plus: 2, scope: 'adjacent', band: 'pusher' },
+  corn:   { plus: 2, scope: 'all' },
+};
+const HOLD_SLOTS = 3;         // 保管庫の枠数
+
 const CAT_LABEL = { normal:'通常', special:'特殊', versus:'対戦' };
 
 /* ===== グローバル状態 ===== */
@@ -67,10 +76,10 @@ let liveChecked = false;      // live.js の準備が済んだ(または諦め�
 
 // UI 一時状態
 let currentCat = 'normal';
-let dragIdx = null;        // DnD 中のワゴン index
+let dragRef = null;        // DnD 中のワゴン(置き場所つき)
 
 function emptyState(){
-  return { v:2, name:'', concept:'', tags:[], engine:'steam', enginePos:0, wagons:[] };
+  return { v:2, name:'', concept:'', tags:[], engine:'steam', enginePos:0, wagons:[], hold: Array(HOLD_SLOTS).fill(null) };
 }
 // ワゴン追加時の初期拡張パーツ。クラフトワゴンはゲーム開始時から
 // 貨物引き寄せ(storage-pull)が1枠目に搭載されている。
@@ -151,8 +160,19 @@ function normalizeBuild(o){
   const eng = String(o.engine ?? o.e ?? 'steam');
   s.engine  = engineById[eng] ? eng : 'steam';
   const rawW = o.wagons ?? o.w ?? [];
-  s.wagons = rawW.map(w => {
-    if (Array.isArray(w)) w = { id:w[0], level:w[1], memo:w[2], ext:w[3] };
+  s.wagons = rawW.map(normWagon).filter(Boolean).slice(0, MAX_WAGONS);
+  const rawH = o.hold ?? o.h ?? [];
+  s.hold = Array.from({ length: HOLD_SLOTS }, (_, k) => normWagon(rawH[k]) || null);
+  const p = parseInt(o.enginePos ?? o.p, 10);
+  s.enginePos = Number.isFinite(p) ? Math.max(0, Math.min(s.wagons.length, p)) : s.wagons.length;
+  if (s.engine !== 'pusher') s.enginePos = s.wagons.length; // 推進式以外は先頭固定
+  return s;
+}
+// ワゴン1台ぶんの正規化(編成・保管庫で共通)
+function normWagon(w){
+  if (!w) return null;
+  if (Array.isArray(w)) w = { id:w[0], level:w[1], memo:w[2], ext:w[3] };
+  {
     const def = wagonById[w.id]; if (!def) return null;
     const lv = Math.max(1, Math.min(MAX_BASE_LEVEL, maxLevel(def), parseInt(w.level, 10) || 1));
     let ext;
@@ -164,15 +184,14 @@ function normalizeBuild(o){
       ext = defaultExt(w.id); // 旧形式データからの移行
     }
     return { id:w.id, level:lv, memo:String(w.memo ?? ''), ext };
-  }).filter(Boolean).slice(0, MAX_WAGONS);
-  const p = parseInt(o.enginePos ?? o.p, 10);
-  s.enginePos = Number.isFinite(p) ? Math.max(0, Math.min(s.wagons.length, p)) : s.wagons.length;
-  if (s.engine !== 'pusher') s.enginePos = s.wagons.length; // 推進式以外は先頭固定
-  return s;
+  }
 }
 function minifyState(){
-  return { v:2, n:state.name, c:state.concept, t:state.tags, e:state.engine, p:state.enginePos,
-    w:state.wagons.map(w => [w.id, w.level, w.memo || undefined, w.ext.some(Boolean) ? w.ext : undefined]) };
+  const mini = w => [w.id, w.level, w.memo || undefined, w.ext.some(Boolean) ? w.ext : undefined];
+  const o = { v:2, n:state.name, c:state.concept, t:state.tags, e:state.engine, p:state.enginePos,
+    w:state.wagons.map(mini) };
+  if (state.hold.some(Boolean)) o.h = state.hold.map(h => h ? mini(h) : null);
+  return o;
 }
 
 /* ===== URL エンコード/デコード (deflate + Base64URL / 非対応環境は無圧縮) ===== */
@@ -221,18 +240,19 @@ async function decodeBuild(str){
  * - チャージワゴン自身の隣接範囲は推進式・自身のパーツのブースト込みレベルで判定する。 */
 function computeEffects(){
   const n = state.wagons.length;
-  const pusherPlus = Array(n).fill(0);
-  if (state.engine === 'pusher') {
-    [state.enginePos - 1, state.enginePos].forEach(k => { if (k >= 0 && k < n) pusherPlus[k] = 2; });
+  const buff = ENGINE_BUFF[state.engine];
+  const enginePlus = Array(n).fill(0);
+  if (buff) {
+    if (buff.scope === 'all') enginePlus.fill(buff.plus);
+    else [state.enginePos - 1, state.enginePos].forEach(k => { if (k >= 0 && k < n) enginePlus[k] = buff.plus; });
   }
-  const partsPlus = state.wagons.map(w =>
-    w.ext.reduce((sum, p) => sum + ((p && EXT_INFO[p] && EXT_INFO[p].level_plus) || 0), 0));
+  const partsPlus = state.wagons.map(extLevelPlus);
   const bands = Array.from({ length:n }, () => []);
   const chargePlus = Array(n).fill(0);
   state.wagons.forEach((w, i) => {
     const def = wagonById[w.id];
     if (!def || !def.aura) return;
-    const lvForRange = Math.min(w.level + pusherPlus[i] + partsPlus[i], maxLevel(def));
+    const lvForRange = Math.min(w.level + enginePlus[i] + partsPlus[i], maxLevel(def));
     const ent = levelEntry(def, lvForRange);
     const r = parseInt(ent && ent.stats && ent.stats[def.aura.stat_key], 10) || 0;
     for (let k = Math.max(0, i - r); k <= Math.min(n - 1, i + r); k++) {
@@ -240,16 +260,28 @@ function computeEffects(){
       if (def.aura.type === 'supercharge' && k !== i) chargePlus[k] += 1;
     }
   });
-  if (state.engine === 'pusher') {
+  // 隣接だけに効くエンジン(推進式)は帯で範囲を示す。全体バフは全車に付くので帯は出さない
+  if (buff && buff.scope === 'adjacent' && buff.band) {
     [state.enginePos - 1, state.enginePos].forEach(k => {
-      if (k >= 0 && k < n) bands[k].push({ type:'pusher', src:false });
+      if (k >= 0 && k < n) bands[k].push({ type: buff.band, src:false });
     });
   }
   const plus = state.wagons.map((w, i) => ({
-    pusher: pusherPlus[i], charge: chargePlus[i], parts: partsPlus[i],
-    total: pusherPlus[i] + chargePlus[i] + partsPlus[i],
+    engine: enginePlus[i], charge: chargePlus[i], parts: partsPlus[i],
+    total: enginePlus[i] + chargePlus[i] + partsPlus[i],
   }));
-  return { bands, plus };
+  // 保管庫は編成から独立。エンジンの全体バフと自身の拡張パーツのみ効く
+  const holdEngine = (buff && buff.scope === 'all') ? buff.plus : 0;
+  const holdPlus = state.hold.map(h => {
+    if (!h) return null;
+    const pp = extLevelPlus(h);
+    return { engine: holdEngine, charge: 0, parts: pp, total: holdEngine + pp };
+  });
+  return { bands, plus, holdPlus };
+}
+// 拡張パーツによるレベル加算(スーパーチャージ+1 / ハイドロチャージ+2)
+function extLevelPlus(w){
+  return w.ext.reduce((sum, p) => sum + ((p && EXT_INFO[p] && EXT_INFO[p].level_plus) || 0), 0);
 }
 
 /* ===== 資材フロー(拡張パーツから自動生成) ===== */
@@ -335,10 +367,61 @@ function renderTrain(){
 
   items.forEach((it, k) => {
     if (k > 0) train.appendChild(Object.assign(document.createElement('div'), { className:'coupler' }));
-    train.appendChild(it.t === 'engine' ? engineCell() : wagonCell(it.i, fx));
+    train.appendChild(it.t === 'engine' ? engineCell()
+      : wagonCell({ place:'train', i: it.i }, { plus: fx.plus[it.i], bands: fx.bands[it.i] }));
   });
 
   drawArrows(); // getBoundingClientRect が同期でレイアウトを確定させるので直接呼んでよい
+}
+
+/* ===== 保管庫(エンジンとは別枠の3スロット) =====
+ * 編成からは独立しているので、資材フローやチャージワゴン等の影響は受けない。
+ * エンジンの全体バフ(トウコモティブ)と自身の拡張パーツだけが効く。 */
+function renderHold(){
+  const wrap = $('#holdWrap');
+  const row = $('#hold');
+  const editing = isEditing();
+  const any = state.hold.some(Boolean);
+  wrap.hidden = !editing && !any;        // 閲覧時は中身がある時だけ表示
+  if (wrap.hidden) { row.innerHTML = ''; return; }
+  const fx = computeEffects();
+  row.innerHTML = '';
+  state.hold.forEach((h, k) => {
+    const ref = { place:'hold', i:k };
+    if (h) {
+      row.appendChild(wagonCell(ref, { plus: fx.holdPlus[k], bands: [] }));
+      return;
+    }
+    if (!editing) return;                  // 閲覧時は空き枠を出さない
+    const empty = document.createElement('div');
+    empty.className = 'hold-empty editable';
+    empty.innerHTML = `<span>+</span><span class="cap">保管庫${k + 1}</span>`;
+    if (editing) {
+      empty.onclick = () => openWagonPicker(id => { state.hold[k] = newWagon(id); autosave(); renderAll(); });
+      empty.addEventListener('dragover',  ev => { ev.preventDefault(); empty.classList.add('drag-over'); });
+      empty.addEventListener('dragleave', () => empty.classList.remove('drag-over'));
+      empty.addEventListener('drop', ev => {
+        ev.preventDefault(); empty.classList.remove('drag-over');
+        if (dragRef) moveBetween(dragRef, ref);
+      });
+    }
+    row.appendChild(empty);
+  });
+}
+
+/* 保管庫に入れるワゴンを選ぶ */
+function openWagonPicker(onPick){
+  dlgBox.classList.add('wide');
+  dlgBox.innerHTML = `
+    <h4>保管庫に入れるワゴンを選ぶ</h4>
+    <div class="ext-grid pick-grid">
+      ${DATA.wagons.map(w => `<div class="ext-pick" data-id="${esc(w.id)}" title="${esc(w.description || '')}">
+        <img src="${esc(wagonIcon(w, 1))}" alt="" loading="lazy"><span class="pn">${esc(w.name_ja)}</span></div>`).join('')}
+    </div>
+    <div class="dlg-btns"><button class="btn subtle" id="dlgCancel">キャンセル</button></div>`;
+  dlgBox.querySelectorAll('.ext-pick').forEach(el => el.onclick = () => { closeDialog(); onPick(el.dataset.id); });
+  $('#dlgCancel').onclick = closeDialog;
+  dlgOverlay.classList.add('show');
 }
 
 function engineCell(){
@@ -363,22 +446,29 @@ function engineCell(){
   return ec;
 }
 
-function wagonCell(i, fx){
-  const w = state.wagons[i];
+/* ワゴンの置き場所。place: 'train'(編成) | 'hold'(保管庫) */
+function wagonAt(ref){ return ref.place === 'hold' ? state.hold[ref.i] : state.wagons[ref.i]; }
+function sameRef(a, b){ return !!a && !!b && a.place === b.place && a.i === b.i; }
+
+// ワゴン1枚のカード。編成でも保管庫でも同じものを使う
+function wagonCell(ref, info){
+  const w = wagonAt(ref);
   const def = wagonById[w.id];
   const n = state.wagons.length;
+  const isHold = ref.place === 'hold';
   const cell = document.createElement('div');
   cell.className = 'wagon-cell';
-  cell.dataset.i = i;
+  cell.dataset.place = ref.place;
+  cell.dataset.i = ref.i;
 
   // オーラの種類を重複排除(同種オーラが複数ソースから届いても帯は1本)
   const seen = {};
-  (fx.bands[i] || []).forEach(a => {
+  (info.bands || []).forEach(a => {
     if (!seen[a.type]) seen[a.type] = { type:a.type, src:false };
     if (a.src) seen[a.type].src = true;
   });
   const auraTypes = Object.values(seen);
-  const plus = fx.plus[i];
+  const plus = info.plus;
 
   // 実効レベル(チャージ/推進式ブースト込み)。アイコン・下端ライン・ツールチップの
   // ステータスはこの実効レベルのものを表示する。
@@ -392,14 +482,14 @@ function wagonCell(i, fx){
   const badgeBg = levelColor(effLv);
   const badgeFg = (effLv === 4 || effLv >= 6) ? '#fff' : '#1c2230';
   wb.innerHTML = `
-    <span class="idx">#${n - i}</span>
+    <span class="idx">${isHold ? '保' + (ref.i + 1) : '#' + (n - ref.i)}</span>
     ${w.memo ? '<span class="memo-mark" title="作者メモあり">📝</span>' : ''}
     ${plus.total > 0 ? `<span class="plusbadge" style="background:${badgeBg};color:${badgeFg}" title="実効 Lv.${effLv}">+${plus.total}Lv</span>` : ''}
     ${icon ? `<img src="${esc(icon)}" alt="${esc(def.name_ja)}" loading="lazy">` : ''}
     <div class="aura-stack">${auraTypes.map(a =>
       `<div class="aura-band${a.src ? ' src' : ''}" style="background:${AURA_STYLE[a.type].color};color:${AURA_STYLE[a.type].color}"></div>`).join('')}</div>
     <div class="lvline" style="background:${levelColor(effLv)}"></div>`;
-  bindTip(wb, () => wagonTipHTML(i));
+  bindTip(wb, () => wagonTipHTML(ref));
   cell.appendChild(wb);
 
   const nm = document.createElement('div');
@@ -441,44 +531,44 @@ function wagonCell(i, fx){
   }
   cell.appendChild(lvrow);
 
-  cell.appendChild(extRow(i));
+  cell.appendChild(extRow(ref));
 
   // 編集列
   if (isEditing()) {
     const er = document.createElement('div');
     er.className = 'editrow';
-    er.innerHTML = `
-      <button data-act="left"  title="左(後方)へ" ${i <= 0 ? 'disabled' : ''}>◀</button>
-      <button data-act="memo"  title="メモを編集">📝</button>
-      <button data-act="del" class="del" title="削除">✕</button>
-      <button data-act="right" title="右(前方)へ" ${i >= n - 1 ? 'disabled' : ''}>▶</button>`;
+    const i = ref.i;
+    er.innerHTML = (isHold ? '' : `<button data-act="left" title="左(後方)へ" ${i <= 0 ? 'disabled' : ''}>◀</button>`) +
+      `<button data-act="memo" title="メモを編集">📝</button>
+       <button data-act="del" class="del" title="${isHold ? '保管庫から外す' : '削除'}">✕</button>` +
+      (isHold ? '' : `<button data-act="right" title="右(前方)へ" ${i >= n - 1 ? 'disabled' : ''}>▶</button>`);
     er.querySelectorAll('button').forEach(b => b.onclick = ev => {
       ev.stopPropagation();
       const act = b.dataset.act;
       if (act === 'left'  && i > 0)     moveWagon(i, i - 1);
       if (act === 'right' && i < n - 1) moveWagon(i, i + 1);
-      if (act === 'del') removeWagon(i);
-      if (act === 'memo') openMemoDialog(i);
+      if (act === 'del') removeWagon(ref);
+      if (act === 'memo') openMemoDialog(ref);
     });
     cell.appendChild(er);
 
-    // ドラッグ&ドロップ並べ替え
+    // ドラッグ&ドロップ(編成↔保管庫の入れ替えもできる)
     cell.draggable = true;
-    cell.addEventListener('dragstart', () => { dragIdx = i; cell.classList.add('dragging'); });
-    cell.addEventListener('dragend',   () => { dragIdx = null; cell.classList.remove('dragging'); });
+    cell.addEventListener('dragstart', () => { dragRef = { ...ref }; cell.classList.add('dragging'); });
+    cell.addEventListener('dragend',   () => { dragRef = null; cell.classList.remove('dragging'); });
     cell.addEventListener('dragover',  ev => { ev.preventDefault(); cell.classList.add('drag-over'); });
     cell.addEventListener('dragleave', () => cell.classList.remove('drag-over'));
     cell.addEventListener('drop', ev => {
       ev.preventDefault(); cell.classList.remove('drag-over');
-      if (dragIdx !== null && dragIdx !== i) moveWagon(dragIdx, i);
+      if (dragRef) moveBetween(dragRef, ref);
     });
   }
   return cell;
 }
 
 /* ===== 拡張パーツスロット ===== */
-function extRow(i){
-  const w = state.wagons[i];
+function extRow(ref){
+  const w = wagonAt(ref);
   const row = document.createElement('div');
   row.className = 'ext-row';
   w.ext.forEach((pid, si) => {
@@ -492,7 +582,7 @@ function extRow(i){
       slot.title = '拡張スロット' + (isEditing() ? '(クリックで装着)' : '');
     }
     if (isEditing()) {
-      slot.onclick = ev => { ev.stopPropagation(); openExtDialog(i, si); };
+      slot.onclick = ev => { ev.stopPropagation(); openExtDialog(ref, si); };
     }
     row.appendChild(slot);
   });
@@ -513,8 +603,8 @@ function extRow(i){
   return row;
 }
 
-function openExtDialog(i, slotIdx){
-  const w = state.wagons[i];
+function openExtDialog(ref, slotIdx){
+  const w = wagonAt(ref);
   const def = wagonById[w.id];
   const cur = w.ext[slotIdx];
   const compatMark = pid => {
@@ -545,18 +635,40 @@ function openExtDialog(i, slotIdx){
 }
 
 /* ===== ワゴン操作 ===== */
+function newWagon(id){ return { id, level:1, memo:'', ext: defaultExt(id) }; }
+
 function addWagon(id){
   if (!isEditing()) return;
   if (state.wagons.length >= MAX_WAGONS) { toast(`ワゴンは最大 ${MAX_WAGONS} 台までです`); return; }
   // 新規ワゴンは編成の最後尾(エンジンから最も遠い端)に連結する
-  state.wagons.unshift({ id, level:1, memo:'', ext: defaultExt(id) });
+  state.wagons.unshift(newWagon(id));
   if (state.engine === 'pusher') state.enginePos = Math.min(state.enginePos + 1, state.wagons.length);
   else state.enginePos = state.wagons.length;
   autosave(); renderAll();
 }
-function removeWagon(i){
-  state.wagons.splice(i, 1);
-  if (state.enginePos > i) state.enginePos--;
+function removeWagon(ref){
+  if (ref.place === 'hold') { state.hold[ref.i] = null; autosave(); renderAll(); return; }
+  state.wagons.splice(ref.i, 1);
+  if (state.enginePos > ref.i) state.enginePos--;
+  autosave(); renderAll();
+}
+
+/* 編成↔保管庫のドラッグ移動(相手がいれば入れ替え) */
+function moveBetween(src, dst){
+  if (sameRef(src, dst)) return;
+  if (src.place === 'train' && dst.place === 'train') { moveWagon(src.i, dst.i); return; }
+  const a = wagonAt(src), b = wagonAt(dst);
+  if (!a) return;
+  if (src.place === 'hold' && dst.place === 'hold') {
+    state.hold[src.i] = b; state.hold[dst.i] = a;
+  } else if (src.place === 'train' && dst.place === 'hold') {
+    state.hold[dst.i] = a;
+    if (b) state.wagons[src.i] = b;            // 入れ替え
+    else { state.wagons.splice(src.i, 1); if (state.enginePos > src.i) state.enginePos--; }
+  } else {                                      // 保管庫 → 編成
+    state.hold[src.i] = b; state.wagons[dst.i] = a;
+  }
+  if (state.engine !== 'pusher') state.enginePos = state.wagons.length;
   autosave(); renderAll();
 }
 // i の要素を j の位置へ移動(隣接なら入れ替えと同じ)
@@ -570,7 +682,7 @@ function moveWagon(i, j){
 
 /* ===== 資材フロー矢印(コの字型・拡張パーツから自動生成) ===== */
 function wagonCenterX(i){
-  const cell = $(`.wagon-cell[data-i="${i}"]`);
+  const cell = $(`#train .wagon-cell[data-i="${i}"]`);
   if (!cell) return null;
   const r = cell.querySelector('.wbox').getBoundingClientRect();
   const sr = $('.stage').getBoundingClientRect();
@@ -698,6 +810,11 @@ function renderLegend(flows){
   state.wagons.forEach(w => { const d = wagonById[w.id]; if (d && d.aura) auraTypes.add(d.aura.type); });
   if (state.engine === 'pusher' && state.wagons.length) auraTypes.add('pusher');
   let html = '';
+  const gBuff = ENGINE_BUFF[state.engine];
+  if (gBuff && gBuff.scope === 'all' && state.wagons.length) {
+    html += `<span class="it"><span class="ln" style="border-top-width:5px;border-color:var(--gold)"></span>` +
+      `${esc(engineById[state.engine].name_ja)}: 全ワゴン +${gBuff.plus}Lv</span>`;
+  }
   parts.forEach(p => { html += `<span class="it"><span class="ln" style="border-color:${FLOW_PARTS[p].color}"></span>${esc(EXT_NAME[p] || p)}</span>`; });
   auraTypes.forEach(a => { html += `<span class="it"><span class="ln" style="border-top-width:5px;border-color:${AURA_STYLE[a].color}"></span>${esc(AURA_STYLE[a].label)}の効果範囲</span>`; });
   lg.innerHTML = html;
@@ -770,7 +887,7 @@ function statsTableHTML(def, baseLv, plus){
   let head;
   if (plus.total > 0) {
     const detail = [`基本 Lv.${baseLv}`];
-    if (plus.pusher) detail.push(`推進式 +${plus.pusher}`);
+    if (plus.engine) detail.push(`${engineById[state.engine].name_ja} +${plus.engine}`);
     if (plus.charge) detail.push(`チャージワゴン +${plus.charge}`);
     if (plus.parts)  detail.push(`拡張パーツ +${plus.parts}`);
     head = `実効 Lv.${effLv} のステータス <span style="font-weight:500">(${detail.join(' / ')})</span>`;
@@ -790,15 +907,16 @@ function partsHTML(def){
      ${esc(EXT_NAME[pid] || p.name_ja)}${p.note_ref ? `<span class="ref" title="wiki脚注 ${esc(p.note_ref)} 参照">${esc(p.note_ref)}</span>` : ''}</span>`).join('');
   return `<div class="sec">拡張パーツ対応</div><div class="parts">${items}</div>`;
 }
-function wagonTipHTML(i){
-  const w = state.wagons[i];
+function wagonTipHTML(ref){
+  const w = wagonAt(ref);
   const def = wagonById[w.id];
   const fx = computeEffects();
-  const seen = new Set((fx.bands[i] || []).map(a => a.type));
-  const plus = fx.plus[i];
+  const isHold = ref.place === 'hold';
+  const seen = new Set(isHold ? [] : (fx.bands[ref.i] || []).map(a => a.type));
+  const plus = isHold ? fx.holdPlus[ref.i] : fx.plus[ref.i];
   let auraHtml = '';
   if (def.aura) {
-    const lvForRange = Math.min(w.level + plus.pusher + plus.parts, maxLevel(def));
+    const lvForRange = Math.min(w.level + plus.engine + plus.parts, maxLevel(def));
     const ent = levelEntry(def, lvForRange);
     const r = parseInt(ent && ent.stats && ent.stats[def.aura.stat_key], 10) || 0;
     auraHtml += `<div class="aura-info"><span class="sw" style="background:${AURA_STYLE[def.aura.type].color}"></span>
@@ -824,6 +942,7 @@ function wagonTipHTML(i){
        <ul class="tips-list">${tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul></details>` : '';
   return `
     <h3>${esc(def.name_ja)} <span class="cat ${esc(def.category)}">${CAT_LABEL[def.category] || esc(def.category)}</span></h3>
+    ${isHold ? '<div class="hint">保管庫のワゴン(編成に連結していないため、チャージワゴン等の効果は受けません)</div>' : ''}
     ${def.game_description ? `<div class="gamedesc">“${esc(def.game_description)}”</div>` : ''}
     ${def.description ? `<div class="desc">${esc(def.description)}</div>` : ''}
     ${def.levelup_summary ? `<div class="desc" style="opacity:.7">📈 ${esc(def.levelup_summary)}</div>` : ''}
@@ -910,10 +1029,11 @@ const dlgBox = $('#dlgBox');
 function closeDialog(){ dlgOverlay.classList.remove('show'); dlgBox.innerHTML = ''; dlgBox.className = 'dlg'; }
 dlgOverlay.addEventListener('click', ev => { if (ev.target === dlgOverlay) closeDialog(); });
 
-function openMemoDialog(i){
-  const w = state.wagons[i];
+function openMemoDialog(ref){
+  const w = wagonAt(ref);
+  const where = ref.place === 'hold' ? `保管庫${ref.i + 1}` : `#${state.wagons.length - ref.i}`;
   dlgBox.innerHTML = `
-    <h4>作者メモ — ${esc(wagonById[w.id].name_ja)} <span class="hint">#${state.wagons.length - i}</span></h4>
+    <h4>作者メモ — ${esc(wagonById[w.id].name_ja)} <span class="hint">${where}</span></h4>
     <textarea id="memoText" placeholder="このビルドでの役割・コンセプトなど(ツールチップに表示されます)">${esc(w.memo)}</textarea>
     <div class="dlg-btns">
       <button class="btn subtle" id="dlgCancel">キャンセル</button>
@@ -1261,6 +1381,7 @@ function renderAll(){
   renderHeader();
   renderMeta();
   renderTrain();
+  renderHold();
   renderPalette();
 }
 

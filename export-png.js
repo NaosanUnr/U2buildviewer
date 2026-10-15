@@ -103,6 +103,15 @@
     }
     if (state.enginePos >= n) items.push({ t:'engine' });
 
+    const cardOf = (w, plus, bands, label) => {
+      const def = wagonById[w.id];
+      const effLv = w.level + plus.total;
+      const dispLv = Math.min(effLv, maxLevel(def));
+      return { w, def, plus, effLv, dispLv, no: label, bands,
+        icon: wagonIcon(def, dispLv), parts: w.ext.filter(Boolean), consume: consumeSpec(w.id) };
+    };
+    const hold = state.hold.map((h, k) => h ? cardOf(h, fx.holdPlus[k], [], '保' + (k + 1)) : null);
+
     const wagons = state.wagons.map((w, i) => {
       const def = wagonById[w.id];
       const plus = fx.plus[i];
@@ -143,14 +152,14 @@
     return {
       name: state.name, concept: state.concept, tags: state.tags,
       eng: engineById[state.engine], engineFront: state.enginePos >= n,
-      items, wagons, flows, laneCount: lanes.length,
+      items, wagons, hold, flows, laneCount: lanes.length,
     };
   }
 
   async function preload(m){
     const srcs = new Set();
     if (m.eng) srcs.add(m.eng.icon);
-    m.wagons.forEach(e => {
+    [...m.wagons, ...m.hold.filter(Boolean)].forEach(e => {
       srcs.add(e.icon);
       e.parts.forEach(p => srcs.add(extIcon(p)));
       if (e.consume) e.consume.keys.forEach(k => srcs.add(matIcon(k)));
@@ -163,7 +172,7 @@
   // Webフォントは使う文字の分だけ遅延読み込みされるので、描く前に必要な文字を読ませる
   const STATIC_TEXT = 'Unrailed2·BuildViewer無題のビルド編成拡張パーツ装着なしワゴンの説明台先頭消費資材前後に効果受けている実効基本のステータス推進式チャージ変化なしは値データwiki未収録ため収録上限表示していますエンジン性能特性作者メモtips対応表通常特殊対戦初期数水容量開始速度出典0123456789+→⭕×…#.:()（）・/';
   async function loadFonts(m){
-    const defs = [...new Set(m.wagons.map(e => e.def))];
+    const defs = [...new Set([...m.wagons, ...m.hold.filter(Boolean)].map(e => e.def))];
     const all = STATIC_TEXT + JSON.stringify({ s: state, d: defs, e: m.eng, n: EXT_NAME, i: EXT_INFO, a: AURA_STYLE, l: MAT_INFO.labels });
     const faces = [F(12, 500), F(12, 600), F(12, 700), F(12, 800)];
     try {
@@ -232,6 +241,7 @@
     y += 20;
 
     y = paintTrain(ctx, W, y, m);
+    y = paintHold(ctx, W, y, m);
     y = paintLegend(ctx, W, y, m);
     y = paintPartsList(ctx, W, y, m);
     if (opts.desc) y = paintDescriptions(ctx, W, y, m, opts);
@@ -340,7 +350,7 @@
     if (src) { rr(ctx, cx + 1, cy + 1, CARD_W - 2, CARD_H - 2, 13); ctx.strokeStyle = AURA_STYLE[src.type].color; ctx.lineWidth = 2; ctx.stroke(); }
 
     drawFit(ctx, IMG(e.icon), cx + 6, cy + CARD_H - 12 - 82, 104, 82, true, true);
-    text(ctx, `#${e.no}`, cx + 8, cy + CARD_H - 16, F(10, 800), 'rgba(154,163,178,.85)');
+    text(ctx, typeof e.no === 'number' ? `#${e.no}` : String(e.no), cx + 8, cy + CARD_H - 16, F(10, 800), 'rgba(154,163,178,.85)');
     if (e.w.memo) text(ctx, '📝', cx + CARD_W - 7, cy + CARD_H - 16, F(11, 500), C.cream, 'right');
     if (e.plus.total > 0) {
       const s = `+${e.plus.total}Lv`;
@@ -384,6 +394,18 @@
     return CARD_H + 44 + (rowsN ? rowsN * (SL + GAP) : 0) + 2;
   }
 
+  /* ---------- 保管庫(編成とは別枠) ---------- */
+  function paintHold(ctx, W, y, m){
+    const list = m.hold.filter(Boolean);
+    if (!list.length) return y;
+    y += 6;
+    text(ctx, '📦 保管庫', PAD, y + 9, F(13, 800), C.muted);
+    y += 24;
+    let rowH = 0;
+    list.forEach((e, k) => { rowH = Math.max(rowH, paintWagon(ctx, PAD + k * (CELL_W + 10), y, e)); });
+    return y + rowH + 14;
+  }
+
   /* ---------- 凡例 ---------- */
   function paintLegend(ctx, W, y, m){
     const items = [];
@@ -391,6 +413,10 @@
     const auras = new Set();
     m.wagons.forEach(e => { if (e.def.aura) auras.add(e.def.aura.type); });
     if (state.engine === 'pusher' && m.wagons.length) auras.add('pusher');
+    const gBuff = ENGINE_BUFF[state.engine];
+    if (gBuff && gBuff.scope === 'all' && m.wagons.length) {
+      items.push({ color: C.gold, label: `${m.eng.name_ja}: 全ワゴン +${gBuff.plus}Lv`, th: 5 });
+    }
     auras.forEach(a => items.push({ color: AURA_STYLE[a].color, label: AURA_STYLE[a].label + 'の効果範囲', th: 5 }));
     if (!items.length) return y;
     let lx = PAD;
@@ -452,7 +478,8 @@
     const innerW = W - PAD * 2;
     const cols = Math.max(1, Math.min(4, Math.floor((innerW + GAP) / (440 + GAP))));
     const cw = (innerW - GAP * (cols - 1)) / cols;
-    const cards = [{ engine: true }, ...[...m.wagons].reverse().map(e => ({ e }))]; // エンジン → #1 → …
+    const cards = [{ engine: true }, ...[...m.wagons].reverse().map(e => ({ e })),
+      ...m.hold.filter(Boolean).map(e => ({ e }))]; // エンジン → #1 → … → 保管庫
 
     // 石積み配置: 各カードを一番短い列に積む(長さの違うカードでも隙間ができない)
     const colY = Array(cols).fill(y);
@@ -535,7 +562,8 @@
     const catLabel = CAT_LABEL[def.category] || def.category;
     const chipW = ctx.measureText(catLabel).width + 16;
     ctx.font = F(16, 800);
-    const title = ellipsis(ctx, `#${e.no} ${def.name_ja}`, iw - 54 - chipW - 8);
+    const label = typeof e.no === 'number' ? `#${e.no}` : String(e.no);
+    const title = ellipsis(ctx, `${label} ${def.name_ja}`, iw - 54 - chipW - 8);
     T(title, x0 + P + 54, y + 12, F(16, 800), C.cream);
     ctx.font = F(16, 800);
     chip(catLabel, CAT_COLOR[def.category] || C.muted, x0 + P + 54 + ctx.measureText(title).width + 8, y + 12);
@@ -562,7 +590,7 @@
       wrap(ctx, label, iw - 20).forEach(l => { T(l, x0 + P + 20, y + 10, F(12, 700), C.cream); y += 20; });
     };
     if (def.aura) {
-      const lvForRange = Math.min(e.w.level + e.plus.pusher + e.plus.parts, maxLevel(def));
+      const lvForRange = Math.min(e.w.level + e.plus.engine + e.plus.parts, maxLevel(def));
       const ent = levelEntry(def, lvForRange);
       const r = parseInt(ent && ent.stats && ent.stats[def.aura.stat_key], 10) || 0;
       swatch(AURA_STYLE[def.aura.type].color, `前後 ${r} 台に効果(${def.aura.note})`);
@@ -577,7 +605,7 @@
       let head;
       if (e.plus.total > 0) {
         const d = [`基本 Lv.${e.w.level}`];
-        if (e.plus.pusher) d.push(`推進式 +${e.plus.pusher}`);
+        if (e.plus.engine) d.push(`${m.eng.name_ja} +${e.plus.engine}`);
         if (e.plus.charge) d.push(`チャージワゴン +${e.plus.charge}`);
         if (e.plus.parts)  d.push(`拡張パーツ +${e.plus.parts}`);
         head = `実効 Lv.${e.effLv} のステータス(${d.join(' / ')})`;

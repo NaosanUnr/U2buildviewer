@@ -271,3 +271,17 @@ body.editing .ext-slot:hover{border-color:var(--teal)}
 .copy-edit-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 20px 26px}
 .btn.big{font-size:16px;padding:13px 30px;border-radius:14px;background:var(--gold);color:#2a1402;
   border-bottom:4px solid #c8932f;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+
+/* ===== 保管庫 ===== */
+.hold-wrap{padding:8px 22px 12px;margin-top:2px;border-top:1px dashed rgba(255,255,255,.08)}
+.hold-label{font-size:12px;font-weight:800;color:var(--muted);margin-bottom:8px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.hold{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.hold-empty{width:116px;height:112px;border-radius:14px;border:2px dashed var(--slot-edge);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  color:var(--slot-edge);font-size:26px;font-weight:800;transition:.12s}
+.hold-empty .cap{font-size:10px;font-weight:700;color:var(--muted)}
+.hold-empty.editable{cursor:pointer}
+.hold-empty.editable:hover,.hold-empty.drag-over{border-color:var(--teal);color:var(--teal)}
+.pick-grid{grid-template-columns:repeat(4,1fr)!important;max-height:52vh}
+.pick-grid .ext-pick img{width:52px;height:40px;object-fit:contain}
+@media (max-width:640px){ .hold-wrap{padding:8px 12px 12px} }

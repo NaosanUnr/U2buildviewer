@@ -61,6 +61,16 @@
       "description": "列車編成のどこにでも置けるエンジン！ 隣接するワゴンを＋2レベル強化する。",
       "notes": "ワゴンをどこにでも配置可能 エンジンレベルで隣接数が増える。",
       "icon": "assets/wagons/engine/pusher_s.png"
+    },
+    {
+      "id": "corn",
+      "name_ja": "トウコモティブ",
+      "initial_wagons": "5台",
+      "water_capacity": "60秒",
+      "start_speed": "2番目の駅",
+      "description": "各プレイヤーが紐で繋がれている牽引列車",
+      "notes": "全てのワゴンのレベルが+2され、ダブルボルトの出現率が50％増加している。 エンジンにタックルすると光源を獲得できるが、燃えやすくなるので注意",
+      "icon": "assets/wagons/engine/corn_s.png"
     }
   ],
   "wagons": [
